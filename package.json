@@ -1,0 +1,26 @@
+{
+  "name": "website-demo-githubpages",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MedELh-Get/website-demo-githubpages.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/MedELh-Get/website-demo-githubpages/issues"
+  },
+  "homepage": "https://github.com/MedELh-Get/website-demo-githubpages#readme",
+  "dependencies": {
+    "astro": "^7.3.5"
+  }
+}
