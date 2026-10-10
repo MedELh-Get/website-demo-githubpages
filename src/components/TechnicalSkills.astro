@@ -1,0 +1,403 @@
+---
+const iconBase = "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons";
+
+const areas = [
+  {
+    title: "Cloud infrastructure",
+    preview: "Terraform · Ansible · Linux",
+    icon: "terraform/terraform-original.svg",
+    work: [
+      {
+        context: "At Huawei",
+        text: "Deployed private cloud infrastructure for 5G core services, from OpenStack installation and network integration to production validation.",
+      },
+      {
+        context: "In my own projects",
+        text: "Provision AWS infrastructure with Terraform and configure EC2 applications with Ansible through Systems Manager.",
+      },
+    ],
+    tools: [
+      { label: "Infrastructure", text: "Terraform, Ansible, AWS (EC2, S3, IAM), OpenStack" },
+      { label: "Systems & networking", text: "Linux, KVM/QEMU, Ceph, DNS, BGP, OSPF" },
+    ],
+    link: "#projects",
+    linkLabel: "Explore my infrastructure projects",
+  },
+  {
+    title: "Software delivery",
+    preview: "GitLab CI/CD · Docker · GitHub Actions",
+    icon: "gitlab/gitlab-original.svg",
+    work: [
+      {
+        context: "At Opensee",
+        text: "Containerized internal DevOps tools and built pipelines for code analysis, linting, security checks, image builds and publication. Conditional builds avoided rebuilding images unnecessarily.",
+      },
+      {
+        context: "In my own projects",
+        text: "Build delivery pipelines for a containerized PHP application, with automated checks, SonarQube analysis and artifact publication.",
+      },
+    ],
+    tools: [
+      { label: "Pipelines", text: "GitLab CI/CD, GitHub Actions, Jenkins, Git" },
+      { label: "Builds & quality", text: "Docker, SonarQube, JFrog Artifactory, PHP" },
+    ],
+    link: "#projects",
+    linkLabel: "Explore my delivery projects",
+  },
+  {
+    title: "Kubernetes & GitOps",
+    preview: "Kubernetes · Argo CD · Helm",
+    icon: "kubernetes/kubernetes-original.svg",
+    work: [
+      {
+        context: "At Opensee",
+        text: "Automated deployments with Ansible and Argo CD for approximately five applications across three Kubernetes clusters.",
+      },
+      {
+        context: "Current learning",
+        text: "Practice cluster administration, workload management and troubleshooting as part of my preparation for the CKA exam.",
+      },
+    ],
+    tools: [
+      { label: "Workloads & delivery", text: "Kubernetes, Docker, Argo CD, Helm, Ingress" },
+      { label: "Access & services", text: "RBAC, NGINX, HAProxy" },
+    ],
+    link: "#experience",
+    linkLabel: "Read about my work at Opensee",
+  },
+  {
+    title: "Monitoring & automation",
+    preview: "Prometheus · Grafana · Python",
+    icon: "python/python-original.svg",
+    work: [
+      {
+        context: "At Opensee",
+        text: "Used Prometheus and Grafana to monitor performance and investigate incidents, with HashiCorp Vault for centralized secrets management.",
+      },
+      {
+        context: "An automation I built",
+        text: "Developed a Python tool to track backups across AWS S3 and GCP and send alerts to Slack.",
+      },
+    ],
+    tools: [
+      { label: "Monitoring & scripting", text: "Prometheus, Grafana, Python, Bash / Shell" },
+      { label: "Secrets & access", text: "HashiCorp Vault, SSH, TLS / SSL, RBAC" },
+    ],
+    link: "#experience",
+    linkLabel: "Read about my professional experience",
+  },
+];
+---
+
+<section id="skills" class="practice" aria-labelledby="skills-heading">
+  <div class="container practice-layout">
+    <header class="practice-intro">
+      <p class="eyebrow">TECHNICAL SKILLS</p>
+      <h2 id="skills-heading">What I build<br />and maintain.</h2>
+      <p class="practice-description">
+        From configuring the infrastructure to keeping applications running.
+        These are the areas I work on, and the tools I use along the way.
+      </p>
+      <p class="practice-hint">Open an area to explore the work behind it.</p>
+    </header>
+
+    <div class="practice-list">
+      {
+        areas.map((area, index) => (
+          <details class="practice-area" name="technical-practice" open={index === 0}>
+            <summary>
+              <span class="practice-number" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span class="practice-label">
+                <span class="practice-title">{area.title}</span>
+                <span class="practice-preview">{area.preview}</span>
+              </span>
+              <svg
+                class="practice-chevron"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.6" />
+              </svg>
+            </summary>
+
+            <div class="practice-content">
+              <div class="practice-work">
+                {area.work.map((item) => (
+                  <div class="practice-example">
+                    <p class="practice-context">{item.context}</p>
+                    <p class="practice-evidence">{item.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div class="practice-tools">
+                <img
+                  src={iconBase + "/" + area.icon}
+                  alt=""
+                  width="28"
+                  height="28"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <dl>
+                  {area.tools.map((group) => (
+                    <div>
+                      <dt>{group.label}</dt>
+                      <dd>{group.text}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+
+              <a class="practice-link" href={area.link}>
+                {area.linkLabel}
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .practice {
+    padding-block: clamp(56px, 7vw, 96px);
+    border-block: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .practice-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.45fr);
+    align-items: start;
+    gap: clamp(40px, 6vw, 88px);
+  }
+
+  .practice-intro {
+    max-width: 340px;
+  }
+
+  .practice-intro h2 {
+    margin-bottom: 22px;
+    font-size: clamp(2rem, 3.4vw, 2.9rem);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+  }
+
+  .practice-description {
+    margin-bottom: 30px;
+    color: var(--muted);
+    font-size: 0.96rem;
+    line-height: 1.75;
+  }
+
+  .practice-hint {
+    max-width: 26ch;
+    margin: 0;
+    padding-left: 14px;
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .practice-list {
+    min-width: 0;
+    border-top: 1px solid var(--text);
+  }
+
+  .practice-area {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .practice-area summary {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) 20px;
+    align-items: start;
+    gap: 18px;
+    padding-block: 23px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .practice-area summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .practice-area summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 6px;
+    border-radius: 2px;
+  }
+
+  .practice-number {
+    padding-top: 5px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+  }
+
+  .practice-label {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .practice-title {
+    color: var(--text);
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.025em;
+    transition: color 160ms ease;
+  }
+
+  .practice-preview {
+    color: var(--muted);
+    font-size: 0.79rem;
+    line-height: 1.6;
+  }
+
+  .practice-chevron {
+    margin-top: 5px;
+    color: var(--muted);
+    transition: transform 180ms ease, color 180ms ease;
+  }
+
+  .practice-area[open] .practice-title,
+  .practice-area summary:hover .practice-title {
+    color: var(--accent);
+  }
+
+  .practice-area[open] .practice-chevron {
+    color: var(--accent);
+    transform: rotate(180deg);
+  }
+
+  .practice-content {
+    padding: 0 0 30px 46px;
+  }
+
+  .practice-work {
+    display: grid;
+    gap: 18px;
+  }
+
+  .practice-context {
+    margin-bottom: 5px;
+    color: var(--text);
+    font-size: 0.79rem;
+    font-weight: 650;
+  }
+
+  .practice-evidence {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.75;
+  }
+
+  .practice-tools {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    align-items: start;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .practice-tools img {
+    margin-top: 3px;
+    object-fit: contain;
+  }
+
+  .practice-tools dl {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .practice-tools dt {
+    margin-bottom: 3px;
+    color: var(--text);
+    font-size: 0.75rem;
+    font-weight: 650;
+  }
+
+  .practice-tools dd {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .practice-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    margin-top: 14px;
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-underline-offset: 4px;
+  }
+
+  .practice-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 840px) {
+    .practice-layout {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .practice-intro {
+      max-width: 560px;
+    }
+
+    .practice-intro h2 {
+      font-size: clamp(2rem, 5vw, 2.5rem);
+    }
+
+    .practice-description {
+      margin-bottom: 18px;
+    }
+
+    .practice-hint {
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .practice-area summary {
+      grid-template-columns: 22px minmax(0, 1fr) 20px;
+      gap: 12px;
+      padding-block: 21px;
+    }
+
+    .practice-content {
+      padding-left: 0;
+    }
+
+    .practice-preview {
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .practice-title,
+    .practice-chevron {
+      transition: none;
+    }
+  }
+</style>

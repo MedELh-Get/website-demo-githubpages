@@ -1,0 +1,69 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "mohstack — Mohamed El | DevOps & Cloud Engineer",
+  description = "Mohamed El helps teams set up cloud infrastructure, automate application deployments and improve monitoring. Explore his work on mohstack.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffffff" />
+    <title>{title}</title>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#main" aria-label="mohstack home">
+          moh<span>stack</span>
+        </a>
+
+        <nav aria-label="Main navigation">
+          <a href="#about">My story</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+          <a href="#certifications">Certifications</a>
+        
+          <a
+            class="nav-github"
+            href="https://github.com/MedELh-Get"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub ↗
+          </a>
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <a class="brand" href="#main">moh<span>stack</span></a>
+          <p>© {new Date().getFullYear()} Mohamed Elhabib</p>
+        </div>
+
+        <a href="#main">Back to top ↑</a>
+      </div>
+    </footer>
+  </body>
+</html>

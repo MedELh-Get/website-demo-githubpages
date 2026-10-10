@@ -1,0 +1,1192 @@
+---
+const iconBase =
+  "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons";
+
+const icons: Record<string, string> = {
+  terraform: "terraform/terraform-original.svg",
+  ansible: "ansible/ansible-original.svg",
+  aws: "amazonwebservices/amazonwebservices-original-wordmark.svg",
+  linux: "linux/linux-original.svg",
+  docker: "docker/docker-original.svg",
+  git: "git/git-original.svg",
+  gitlab: "gitlab/gitlab-original.svg",
+  argocd: "argocd/argocd-original.svg",
+  kubernetes: "kubernetes/kubernetes-original.svg",
+  nginx: "nginx/nginx-original.svg",
+  python: "python/python-original.svg",
+  postgres: "postgresql/postgresql-original.svg",
+  apache: "apache/apache-original.svg",
+};
+
+const scenes = [
+  {
+    id: "aws",
+    tab: "AWS",
+    title: "From infrastructure to a live website.",
+    type: "Based on my AWS project",
+    description: "Terraform provisions. Ansible configures. Apache serves.",
+    zone: "AWS · VPC / public subnet",
+    zoneIcon: "aws",
+    actors: [
+      { label: "Terraform", icon: "terraform" },
+      { label: "Ansible", icon: "ansible" },
+      { label: "SSM", icon: "aws" },
+      { label: "Visitors", icon: null },
+    ],
+    tiles: [
+      { label: "EC2", detail: "Ubuntu server", icon: "linux" },
+      { label: "S3", detail: "Ansible transfers", icon: "aws" },
+      { label: "Apache", detail: "Web server", icon: "apache" },
+      { label: "Website", detail: "Portfolio page", icon: null },
+    ],
+    frames: [
+      {
+        caption: "Terraform creates the network and provisions an EC2 instance.",
+        actor: 0,
+        states: ["active", "waiting", "waiting", "waiting"],
+        metric: "PROVISIONING",
+      },
+      {
+        caption: "Ansible opens an SSM session; S3 supports file transfers.",
+        actor: 2,
+        states: ["ready", "active", "waiting", "waiting"],
+        metric: "SESSION ESTABLISHED",
+      },
+      {
+        caption: "Ansible installs Apache and enables the service.",
+        actor: 1,
+        states: ["ready", "ready", "active", "waiting"],
+        metric: "CONFIGURING",
+      },
+      {
+        caption: "The portfolio files are deployed to the web server.",
+        actor: 1,
+        states: ["ready", "ready", "ready", "active"],
+        metric: "DEPLOYING",
+      },
+      {
+        caption: "Visitors access the website served by Apache on EC2.",
+        actor: 3,
+        states: ["ready", "ready", "ready", "ready"],
+        metric: "HTTP RESPONSE",
+      },
+    ],
+  },
+  {
+    id: "gitops",
+    tab: "GitOps",
+    title: "A commit becomes a deployment.",
+    type: "GitOps demonstration",
+    description: "CI builds an image. Git declares the version. Argo CD syncs.",
+    zone: "Kubernetes · application deployment",
+    zoneIcon: "kubernetes",
+    actors: [
+      { label: "GitLab CI", icon: "gitlab" },
+      { label: "Registry", icon: "docker" },
+      { label: "Git", icon: "git" },
+      { label: "Argo CD", icon: "argocd" },
+    ],
+    tiles: [
+      { label: "app-v1", detail: "Old replica", icon: "docker" },
+      { label: "app-v2-a", detail: "New replica", icon: "docker" },
+      { label: "app-v2-b", detail: "New replica", icon: "docker" },
+      { label: "Service", detail: "Ready endpoints", icon: "kubernetes" },
+    ],
+    frames: [
+      {
+        caption: "GitLab CI runs checks and builds the next application version.",
+        actor: 0,
+        states: ["ready", "waiting", "waiting", "ready"],
+        metric: "BUILD v2",
+      },
+      {
+        caption: "The Docker image is pushed to a container registry.",
+        actor: 1,
+        states: ["ready", "waiting", "waiting", "ready"],
+        metric: "IMAGE PUBLISHED",
+      },
+      {
+        caption: "The image reference is updated in the Git deployment manifests.",
+        actor: 2,
+        states: ["ready", "waiting", "waiting", "ready"],
+        metric: "DESIRED STATE UPDATED",
+      },
+      {
+        caption: "Argo CD syncs. Worker nodes pull the image and start new pods.",
+        actor: 3,
+        states: ["ready", "active", "active", "ready"],
+        metric: "ROLLING UPDATE",
+      },
+      {
+        caption: "New replicas are ready; the old replica is removed.",
+        actor: 3,
+        states: ["retired", "ready", "ready", "ready"],
+        metric: "ROLLOUT COMPLETE",
+      },
+    ],
+  },
+  {
+    id: "compose",
+    tab: "Compose",
+    title: "Several services. One application.",
+    type: "Docker Compose demonstration",
+    description: "A proxy, an application and a database on one Linux host.",
+    zone: "Linux host · Docker Compose",
+    zoneIcon: "linux",
+    actors: [
+      { label: "compose.yaml", icon: "docker" },
+      { label: "Containers", icon: "docker" },
+      { label: "Browser", icon: null },
+    ],
+    tiles: [
+      { label: "NGINX", detail: "Reverse proxy", icon: "nginx" },
+      { label: "Application", detail: "Request handling", icon: "python" },
+      { label: "PostgreSQL", detail: "Database", icon: "postgres" },
+      { label: "Volume", detail: "Persistent data", icon: null },
+    ],
+    frames: [
+      {
+        caption: "Compose defines the services, networks and persistent volume.",
+        actor: 0,
+        states: ["waiting", "waiting", "waiting", "active"],
+        metric: "CONFIGURATION",
+      },
+      {
+        caption: "The database starts with its persistent volume attached.",
+        actor: 1,
+        states: ["waiting", "waiting", "active", "ready"],
+        metric: "DATABASE STARTING",
+      },
+      {
+        caption: "The application and proxy become ready to handle requests.",
+        actor: 1,
+        states: ["ready", "ready", "ready", "ready"],
+        metric: "SERVICES READY",
+      },
+      {
+        caption: "Requests flow through NGINX to the app, which queries PostgreSQL.",
+        actor: 2,
+        states: ["active", "active", "active", "ready"],
+        metric: "REQUEST / RESPONSE",
+      },
+      {
+        caption: "The app container is recreated; database data stays in its volume.",
+        actor: 1,
+        states: ["ready", "active", "ready", "ready"],
+        metric: "APP RECREATED",
+      },
+    ],
+  },
+  {
+    id: "recovery",
+    tab: "Recovery",
+    title: "A pod fails. The deployment recovers.",
+    type: "Kubernetes recovery demonstration",
+    description: "The controller restores the desired number of replicas.",
+    zone: "Kubernetes · desired replicas: 3",
+    zoneIcon: "kubernetes",
+    actors: [
+      { label: "Service", icon: "kubernetes" },
+      { label: "Controller", icon: "kubernetes" },
+      { label: "Scheduler", icon: "kubernetes" },
+    ],
+    tiles: [
+      { label: "app-a", detail: "Replica", icon: "docker" },
+      { label: "app-b", detail: "Replica", icon: "docker" },
+      { label: "app-c", detail: "Original replica", icon: "docker" },
+      { label: "app-d", detail: "Replacement", icon: "docker" },
+    ],
+    frames: [
+      {
+        caption: "Three ready replicas serve application traffic.",
+        actor: 0,
+        states: ["ready", "ready", "ready", "waiting"],
+        metric: "3 / 3 READY",
+      },
+      {
+        caption: "One pod fails; it stops receiving traffic when it is no longer ready.",
+        actor: 0,
+        states: ["ready", "ready", "failed", "waiting"],
+        metric: "2 / 3 READY",
+      },
+      {
+        caption: "The failed pod is removed. The controller creates a replacement.",
+        actor: 1,
+        states: ["ready", "ready", "retired", "active"],
+        metric: "RECONCILING",
+      },
+      {
+        caption: "The replacement is scheduled and starts on an available worker.",
+        actor: 2,
+        states: ["ready", "ready", "retired", "active"],
+        metric: "POD STARTING",
+      },
+      {
+        caption: "The replacement becomes ready and joins the Service endpoints.",
+        actor: 0,
+        states: ["ready", "ready", "retired", "ready"],
+        metric: "3 / 3 READY",
+      },
+    ],
+  },
+  {
+    id: "scaling",
+    tab: "Scaling",
+    title: "More demand. More replicas.",
+    type: "Horizontal Pod Autoscaler demonstration",
+    description: "Illustrative CPU-based scaling with available cluster capacity.",
+    zone: "Kubernetes · HPA target CPU: 60%",
+    zoneIcon: "kubernetes",
+    actors: [
+      { label: "Visitors", icon: null },
+      { label: "Metrics", icon: "kubernetes" },
+      { label: "HPA", icon: "kubernetes" },
+    ],
+    tiles: [
+      { label: "app-a", detail: "Replica", icon: "docker" },
+      { label: "app-b", detail: "Replica", icon: "docker" },
+      { label: "app-c", detail: "Extra replica", icon: "docker" },
+      { label: "app-d", detail: "Extra replica", icon: "docker" },
+    ],
+    frames: [
+      {
+        caption: "Two replicas handle normal demand below the configured CPU target.",
+        actor: 0,
+        states: ["ready", "ready", "waiting", "waiting"],
+        metric: "2 REPLICAS · CPU 35%",
+      },
+      {
+        caption: "Demand increases and average CPU rises above the target.",
+        actor: 1,
+        states: ["active", "active", "waiting", "waiting"],
+        metric: "2 REPLICAS · CPU 95%",
+      },
+      {
+        caption: "HPA increases the desired replica count; new pods start.",
+        actor: 2,
+        states: ["ready", "ready", "active", "active"],
+        metric: "SCALING TO 4",
+      },
+      {
+        caption: "Four ready replicas share the traffic as CPU usage settles.",
+        actor: 0,
+        states: ["ready", "ready", "ready", "ready"],
+        metric: "4 REPLICAS · CPU 48%",
+      },
+      {
+        caption: "Demand falls. After stabilization, extra replicas are removed.",
+        actor: 2,
+        states: ["ready", "ready", "retired", "retired"],
+        metric: "2 REPLICAS · DEMAND LOWER",
+      },
+    ],
+  },
+  {
+    id: "migration",
+    tab: "Migration",
+    title: "Shift traffic. Keep a way back.",
+    type: "Progressive application migration demonstration",
+    description: "A weighted traffic shift between two application environments.",
+    zone: "Application routing · shared data compatibility assumed",
+    zoneIcon: "nginx",
+    actors: [
+      { label: "Prepare", icon: "ansible" },
+      { label: "Validate", icon: "gitlab" },
+      { label: "Route traffic", icon: "nginx" },
+    ],
+    tiles: [
+      { label: "Current", detail: "Existing environment", icon: "linux" },
+      { label: "New", detail: "Target environment", icon: "linux" },
+      { label: "Router", detail: "Weighted traffic", icon: "nginx" },
+      { label: "Checks", detail: "Health validation", icon: null },
+    ],
+    frames: [
+      {
+        caption: "The current environment serves traffic while the target is prepared.",
+        actor: 0,
+        states: ["ready", "active", "ready", "waiting"],
+        metric: "CURRENT 100% · NEW 0%",
+      },
+      {
+        caption: "Validate the new environment before sending user traffic.",
+        actor: 1,
+        states: ["ready", "ready", "ready", "active"],
+        metric: "HEALTH CHECKS",
+      },
+      {
+        caption: "Route a small share of traffic to the new environment.",
+        actor: 2,
+        states: ["ready", "ready", "active", "ready"],
+        metric: "CURRENT 90% · NEW 10%",
+      },
+      {
+        caption: "Increase traffic gradually while checking application behavior.",
+        actor: 2,
+        states: ["ready", "ready", "active", "ready"],
+        metric: "CURRENT 50% · NEW 50%",
+      },
+      {
+        caption: "The new environment serves all traffic; retain the old one for rollback.",
+        actor: 2,
+        states: ["ready", "ready", "ready", "ready"],
+        metric: "CURRENT 0% · NEW 100%",
+      },
+    ],
+  },
+];
+
+const serializedScenes = JSON.stringify(
+  scenes.map((scene) => ({
+    id: scene.id,
+    frames: scene.frames,
+  }))
+).replace(/</g, "\\u003c");
+---
+
+<div class="stories" data-stories>
+  <script
+    type="application/json"
+    class="stories-data"
+    set:html={serializedScenes}
+  />
+
+  <div class="stories-heading">
+    <p class="eyebrow">INFRASTRUCTURE IN MOTION</p>
+    <button
+      class="play-control"
+      type="button"
+      data-play
+      aria-label="Pause animation"
+    >
+      Pause
+    </button>
+  </div>
+
+  <div class="scene-selector" role="group" aria-label="Choose a scenario">
+    {
+      scenes.map((scene, index) => (
+        <button
+          type="button"
+          data-select={index}
+          aria-pressed={index === 0 ? "true" : "false"}
+        >
+          {scene.tab}
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="scene-container">
+    {
+      scenes.map((scene, index) => (
+        <section
+          class="scene"
+          data-scene={index}
+          hidden={index !== 0}
+          aria-label={scene.title}
+        >
+          <header class="scene-intro">
+            <h2>{scene.title}</h2>
+            <p>{scene.description}</p>
+          </header>
+
+          <div
+            class="actor-track"
+            style={`--actor-count: ${scene.actors.length}`}
+          >
+            {scene.actors.map((actor, actorIndex) => (
+              <div class="actor" data-actor={actorIndex}>
+                <div class="actor-icon">
+                  {actor.icon ? (
+                    <img
+                      src={`${iconBase}/${icons[actor.icon]}`}
+                      width="29"
+                      height="29"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <svg
+                      viewBox="0 0 32 32"
+                      width="29"
+                      height="29"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      aria-hidden="true"
+                    >
+                      <circle cx="16" cy="10" r="5" />
+                      <path d="M6 28v-3a10 10 0 0 1 20 0v3" />
+                    </svg>
+                  )}
+                </div>
+                <span>{actor.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div class="transfer" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+
+          <div class="environment">
+            <div class="environment-heading">
+              <img
+                src={`${iconBase}/${icons[scene.zoneIcon]}`}
+                width="25"
+                height="25"
+                alt=""
+                aria-hidden="true"
+              />
+              <span>{scene.zone}</span>
+            </div>
+
+            <div class="resource-grid">
+              {scene.tiles.map((tile, tileIndex) => (
+                <div class="resource" data-resource={tileIndex}>
+                  <div class="resource-icon">
+                    {tile.icon ? (
+                      <img
+                        src={`${iconBase}/${icons[tile.icon]}`}
+                        width="27"
+                        height="27"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <svg
+                        viewBox="0 0 32 32"
+                        width="27"
+                        height="27"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        aria-hidden="true"
+                      >
+                        <rect x="4" y="5" width="24" height="22" rx="3" />
+                        <path d="M4 12h24M9 8.5h1M13 8.5h1M10 18h12M10 22h8" />
+                      </svg>
+                    )}
+                  </div>
+
+                  <strong>{tile.label}</strong>
+                  <span class="resource-detail">{tile.detail}</span>
+                  <span class="resource-state" data-resource-status>
+                    {index === 0
+                      ? scene.frames[0].states[tileIndex]
+                      : "waiting"}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div class="environment-footer">
+              <span class="metric-dot" aria-hidden="true" />
+              <span data-metric>{scene.frames[0].metric}</span>
+            </div>
+          </div>
+
+          <p class="scenario-type">{scene.type}</p>
+        </section>
+      ))
+    }
+  </div>
+
+  <div class="story-caption">
+    <span class="step-label" data-step-label>01 / 05</span>
+    <p data-caption>{scenes[0].frames[0].caption}</p>
+  </div>
+
+  <div class="story-bottom">
+    <div class="step-indicators" aria-hidden="true">
+      {[0, 1, 2, 3, 4].map((step) => <span data-step-dot={step} />)}
+    </div>
+
+    <div class="story-navigation">
+      <button type="button" data-prev aria-label="Previous scenario">←</button>
+      <button type="button" data-next aria-label="Next scenario">→</button>
+    </div>
+  </div>
+
+  <p class="simulation-note">
+    Illustrated scenarios · simulated states and compressed timing
+  </p>
+</div>
+
+<script>
+  type Frame = {
+    caption: string;
+    actor: number;
+    states: string[];
+    metric: string;
+  };
+
+  type SceneData = {
+    id: string;
+    frames: Frame[];
+  };
+
+  function initializeStories(root: HTMLElement) {
+    if (root.dataset.initialized === "true") return;
+    root.dataset.initialized = "true";
+
+    const dataElement = root.querySelector(".stories-data");
+    const scenes: SceneData[] = JSON.parse(dataElement?.textContent || "[]");
+
+    if (!scenes.length) return;
+
+    const sections = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-scene]")
+    );
+
+    const selectors = Array.from(
+      root.querySelectorAll<HTMLButtonElement>("[data-select]")
+    );
+
+    const playButton =
+      root.querySelector<HTMLButtonElement>("[data-play]")!;
+
+    const previous =
+      root.querySelector<HTMLButtonElement>("[data-prev]")!;
+
+    const next =
+      root.querySelector<HTMLButtonElement>("[data-next]")!;
+
+    const caption = root.querySelector<HTMLElement>("[data-caption]")!;
+    const stepLabel = root.querySelector<HTMLElement>("[data-step-label]")!;
+    const dots = root.querySelectorAll<HTMLElement>("[data-step-dot]");
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+
+    let currentScene = 0;
+    let currentFrame = reducedMotion.matches ? 4 : 0;
+    let playing = !reducedMotion.matches;
+    let visible = true;
+
+    const statusLabels: Record<string, string> = {
+      waiting: "Pending",
+      active: "In progress",
+      ready: "Ready",
+      failed: "Failed",
+      retired: "Removed",
+    };
+
+    function render() {
+      const scene = scenes[currentScene];
+      const frame = scene.frames[currentFrame];
+
+      sections.forEach((section, index) => {
+        section.hidden = index !== currentScene;
+      });
+
+      selectors.forEach((button, index) => {
+        button.setAttribute(
+          "aria-pressed",
+          String(index === currentScene)
+        );
+      });
+
+      const activeSection = sections[currentScene];
+
+      activeSection
+        .querySelectorAll<HTMLElement>("[data-actor]")
+        .forEach((actor, index) => {
+          actor.classList.toggle("is-active", index === frame.actor);
+        });
+
+      activeSection
+        .querySelectorAll<HTMLElement>("[data-resource]")
+        .forEach((resource, index) => {
+          const state = frame.states[index];
+          resource.dataset.state = state;
+
+          const label = resource.querySelector<HTMLElement>(
+            "[data-resource-status]"
+          );
+
+          if (label) {
+            label.textContent = statusLabels[state] || state;
+          }
+        });
+
+      const metric =
+        activeSection.querySelector<HTMLElement>("[data-metric]");
+
+      if (metric) metric.textContent = frame.metric;
+
+      caption.textContent = frame.caption;
+      stepLabel.textContent =
+        `${String(currentFrame + 1).padStart(2, "0")} / ` +
+        `${String(scene.frames.length).padStart(2, "0")}`;
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("is-current", index === currentFrame);
+        dot.classList.toggle("is-complete", index < currentFrame);
+      });
+
+      playButton.textContent = reducedMotion.matches
+        ? "Reduced motion"
+        : playing
+          ? "Pause"
+          : "Play";
+
+      playButton.disabled = reducedMotion.matches;
+
+      playButton.setAttribute(
+        "aria-label",
+        playing ? "Pause animation" : "Play all scenarios"
+      );
+
+      root.dataset.paused = String(
+        !playing || !visible || document.hidden
+      );
+    }
+
+    function selectScene(index: number) {
+      currentScene = (index + scenes.length) % scenes.length;
+      currentFrame = reducedMotion.matches
+        ? scenes[currentScene].frames.length - 1
+        : 0;
+      render();
+    }
+
+    selectors.forEach((button, index) => {
+      button.addEventListener("click", () => selectScene(index));
+    });
+
+    previous.addEventListener("click", () => {
+      selectScene(currentScene - 1);
+    });
+
+    next.addEventListener("click", () => {
+      selectScene(currentScene + 1);
+    });
+
+    playButton.addEventListener("click", () => {
+      playing = !playing;
+      render();
+    });
+
+    reducedMotion.addEventListener("change", () => {
+      playing = !reducedMotion.matches;
+      currentFrame = reducedMotion.matches
+        ? scenes[currentScene].frames.length - 1
+        : 0;
+      render();
+    });
+
+    document.addEventListener("visibilitychange", render);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        visible = entries[0].isIntersecting;
+        render();
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(root);
+
+    window.setInterval(() => {
+      if (!playing || !visible || document.hidden) return;
+
+      currentFrame += 1;
+
+      if (currentFrame >= scenes[currentScene].frames.length) {
+        currentFrame = 0;
+        currentScene = (currentScene + 1) % scenes.length;
+      }
+
+      render();
+    }, 2800);
+
+    render();
+  }
+
+  document
+    .querySelectorAll<HTMLElement>("[data-stories]")
+    .forEach(initializeStories);
+</script>
+
+<style>
+  .stories {
+    min-width: 0;
+    padding-block: 8px;
+  }
+
+  .stories-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+
+  .stories-heading .eyebrow {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.64rem;
+  }
+
+  button {
+    font: inherit;
+    cursor: pointer;
+  }
+
+  button:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  .play-control {
+    min-height: 34px;
+    padding: 5px 11px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: white;
+    color: var(--muted);
+    font-size: 0.72rem;
+  }
+
+  .play-control:disabled {
+    cursor: default;
+  }
+
+  .scene-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .scene-selector button {
+    min-height: 34px;
+    padding: 6px 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.72rem;
+  }
+
+  .scene-selector button:hover {
+    background: var(--surface);
+  }
+
+  .scene-selector button[aria-pressed="true"] {
+    border-color: #cbdcf9;
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+
+  .scene[hidden] {
+    display: none;
+  }
+
+  .scene:not([hidden]) {
+    animation: scene-enter 350ms ease both;
+  }
+
+  .scene-intro {
+    min-height: 110px;
+    padding-top: 22px;
+  }
+
+  .scene-intro h2 {
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+  }
+
+  .scene-intro p {
+    margin-bottom: 18px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  .actor-track {
+    display: grid;
+    grid-template-columns: repeat(var(--actor-count), minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .actor {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 9px;
+    min-height: 91px;
+    padding: 12px 4px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: white;
+    transition:
+      border-color 300ms ease,
+      background-color 300ms ease,
+      transform 300ms ease;
+  }
+
+  .actor:not(:last-child)::after {
+    position: absolute;
+    z-index: 1;
+    top: 35px;
+    right: -9px;
+    width: 8px;
+    height: 1px;
+    background: #a8bddc;
+    content: "";
+  }
+
+  .actor.is-active {
+    border-color: #7ea7ef;
+    background: #f0f5ff;
+    transform: translateY(-3px);
+  }
+
+  .actor-icon {
+    display: grid;
+    place-items: center;
+    height: 30px;
+    color: var(--accent);
+  }
+
+  .actor img,
+  .resource img,
+  .environment-heading img {
+    object-fit: contain;
+  }
+
+  .actor > span {
+    text-align: center;
+    color: var(--text);
+    font-size: 0.67rem;
+    font-weight: 600;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  .transfer {
+    position: relative;
+    width: 2px;
+    height: 34px;
+    margin-inline: auto;
+    overflow: hidden;
+    background: #d9e3f1;
+  }
+
+  .transfer span {
+    position: absolute;
+    width: 2px;
+    height: 9px;
+    background: var(--accent);
+    animation: transfer 2.4s linear infinite;
+    transform: translateY(-10px);
+  }
+
+  .transfer span:nth-child(2) {
+    animation-delay: 0.8s;
+  }
+
+  .transfer span:nth-child(3) {
+    animation-delay: 1.6s;
+  }
+
+  .environment {
+    padding: 15px;
+    border: 1px dashed #a9bddc;
+    border-radius: 9px;
+    background:
+      radial-gradient(#dfe7f3 0.65px, transparent 0.65px),
+      #fafcff;
+    background-size: 13px 13px;
+  }
+
+  .environment-heading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 32px;
+    margin-bottom: 15px;
+  }
+
+  .environment-heading img {
+    flex-shrink: 0;
+  }
+
+  .environment-heading > span {
+    font-size: 0.71rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .resource {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 4px 9px;
+    border: 1px solid #dce3ed;
+    border-radius: 6px;
+    background: white;
+    text-align: center;
+    transition:
+      background-color 400ms ease,
+      border-color 400ms ease,
+      transform 400ms ease;
+  }
+
+  .resource-icon {
+    display: grid;
+    place-items: center;
+    height: 29px;
+    margin-bottom: 8px;
+    color: var(--accent);
+  }
+
+  .resource strong {
+    font-size: 0.69rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  .resource-detail {
+    min-height: 30px;
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 0.59rem;
+    line-height: 1.4;
+  }
+
+  .resource-state {
+    margin-top: 8px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+  }
+
+  .resource[data-state="waiting"] {
+    border-style: dashed;
+    background: #f6f8fb;
+  }
+
+  .resource[data-state="waiting"] .resource-icon {
+    filter: grayscale(1);
+    opacity: 0.5;
+  }
+
+  .resource[data-state="active"] {
+    border-color: #82a8e9;
+    background: #edf4ff;
+    transform: translateY(-3px);
+  }
+
+  .resource[data-state="active"] .resource-state {
+    color: #2458cf;
+  }
+
+  .resource[data-state="ready"] {
+    border-color: #b1d5c5;
+    background: #f2faf6;
+  }
+
+  .resource[data-state="ready"] .resource-state {
+    color: #246648;
+  }
+
+  .resource[data-state="failed"] {
+    border-color: #dda287;
+    background: #fff3ed;
+  }
+
+  .resource[data-state="failed"] .resource-state {
+    color: #9d421c;
+  }
+
+  .resource[data-state="retired"] {
+    border-style: dashed;
+    background: #f6f8fb;
+  }
+
+  .resource[data-state="retired"] .resource-icon {
+    filter: grayscale(1);
+    opacity: 0.35;
+  }
+
+  .environment-footer {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 35px;
+    margin-top: 13px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    line-height: 1.5;
+  }
+
+  .metric-dot {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .scenario-type {
+    margin: 10px 0 0;
+    color: var(--muted);
+    font-size: 0.62rem;
+  }
+
+  .story-caption {
+    display: grid;
+    grid-template-columns: 49px minmax(0, 1fr);
+    gap: 12px;
+    min-height: 84px;
+    margin-top: 17px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .step-label {
+    padding-top: 2px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+  }
+
+  .story-caption p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.77rem;
+    line-height: 1.6;
+  }
+
+  .story-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .step-indicators {
+    display: flex;
+    gap: 6px;
+  }
+
+  .step-indicators span {
+    width: 23px;
+    height: 3px;
+    border-radius: 2px;
+    background: #dce3ed;
+  }
+
+  .step-indicators .is-complete {
+    background: #9bb8eb;
+  }
+
+  .step-indicators .is-current {
+    background: var(--accent);
+  }
+
+  .story-navigation {
+    display: flex;
+    gap: 6px;
+  }
+
+  .story-navigation button {
+    width: 36px;
+    height: 34px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: white;
+    color: var(--text);
+  }
+
+  .story-navigation button:hover {
+    background: var(--accent-soft);
+  }
+
+  .simulation-note {
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 0.6rem;
+  }
+
+  .stories[data-paused="true"] * {
+    animation-play-state: paused !important;
+  }
+
+  @keyframes transfer {
+    to {
+      transform: translateY(38px);
+    }
+  }
+
+  @keyframes scene-enter {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 440px) {
+    .resource-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .resource {
+      padding: 10px 6px;
+    }
+
+    .resource-detail {
+      min-height: 0;
+    }
+
+    .scene-selector {
+      gap: 3px;
+    }
+
+    .scene-selector button {
+      padding-inline: 8px;
+      font-size: 0.68rem;
+    }
+
+    .scene-intro {
+      min-height: 115px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    .actor.is-active,
+    .resource[data-state="active"] {
+      transform: none;
+    }
+  }
+</style>

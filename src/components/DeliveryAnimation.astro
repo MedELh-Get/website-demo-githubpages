@@ -1,0 +1,617 @@
+---
+const icons =
+  "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons";
+
+const stages = [
+  {
+    name: "GitLab CI",
+    detail: "Lint · Test · Build",
+    icon: "gitlab/gitlab-original.svg",
+    step: "ci",
+  },
+  {
+    name: "Docker",
+    detail: "Push image to registry",
+    icon: "docker/docker-original.svg",
+    step: "docker",
+  },
+  {
+    name: "Git",
+    detail: "Update manifest image tag",
+    icon: "git/git-original.svg",
+    step: "git",
+  },
+];
+---
+
+<aside class="delivery-demo" aria-labelledby="delivery-title">
+  <input
+    class="pause-toggle"
+    type="checkbox"
+    id="pause-delivery"
+    aria-label="Pause pipeline animation"
+  />
+
+  <div class="delivery-top">
+    <div>
+      <p class="delivery-eyebrow">FROM COMMIT TO CLUSTER</p>
+      <h2 id="delivery-title">Code ships.<br />Pods come alive.</h2>
+    </div>
+
+    <label class="pause-label" for="pause-delivery">
+      <span class="pause-copy">Pause</span>
+      <span class="resume-copy">Resume</span>
+    </label>
+  </div>
+
+  <p class="delivery-description">
+    An illustrated GitOps delivery workflow.
+  </p>
+
+  <div class="delivery-scene">
+    <div class="build-stages">
+      {
+        stages.map((stage) => (
+          <div class={`stage stage-${stage.step}`}>
+            <img
+              src={`${icons}/${stage.icon}`}
+              width="36"
+              height="36"
+              alt=""
+              aria-hidden="true"
+            />
+            <strong>{stage.name}</strong>
+            <span>{stage.detail}</span>
+
+            <div class="stage-progress" aria-hidden="true">
+              <i />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="connection">
+      <span class="connection-line" aria-hidden="true"><i /></span>
+      <span>Argo CD reads the desired state from Git</span>
+    </div>
+
+    <div class="argo-stage">
+      <img
+        src={`${icons}/argocd/argocd-original.svg`}
+        width="44"
+        height="44"
+        alt=""
+        aria-hidden="true"
+      />
+
+      <div>
+        <strong>Argo CD</strong>
+        <span>Detect change → Sync deployment</span>
+      </div>
+
+      <span class="sync-symbol" aria-hidden="true">↻</span>
+    </div>
+
+    <div class="connection">
+      <span class="connection-line" aria-hidden="true"><i /></span>
+      <span>Apply Kubernetes manifests</span>
+    </div>
+
+    <div class="cluster">
+      <div class="cluster-header">
+        <div class="cluster-name">
+          <img
+            src={`${icons}/kubernetes/kubernetes-original.svg`}
+            width="30"
+            height="30"
+            alt=""
+            aria-hidden="true"
+          />
+          <strong>Kubernetes</strong>
+        </div>
+
+        <span class="cluster-label">APP DEPLOYMENT</span>
+      </div>
+
+      <p class="cluster-description">
+        Worker nodes pull the image from the registry.
+      </p>
+
+      <div
+        class="pods"
+        role="group"
+        aria-label="Illustration of three application replicas"
+      >
+        {
+          [1, 2, 3].map((number) => (
+            <div class={`pod pod-${number}`}>
+              <div class="pod-symbol" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+
+              <strong>app-{number}</strong>
+              <span class="pod-caption">Replica</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="cluster-footer">
+        <div class="linux-label">
+          <img
+            src={`${icons}/linux/linux-original.svg`}
+            width="22"
+            height="22"
+            alt=""
+            aria-hidden="true"
+          />
+          <span>Linux worker nodes</span>
+        </div>
+
+        <span class="replica-label">Desired replicas: 3</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="delivery-disclaimer">
+    Workflow illustration · not live infrastructure status
+  </p>
+</aside>
+
+<style>
+  .delivery-demo {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    padding: 26px;
+    border: 1px solid #2a3b56;
+    border-radius: 16px;
+    background: #101c30;
+    color: #edf3ff;
+    box-shadow: 0 20px 50px -28px #102c60;
+    --cycle: 12s;
+  }
+
+  .delivery-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .delivery-eyebrow {
+    margin: 0 0 12px;
+    color: #93b6ff;
+    font: 0.66rem var(--font-mono);
+    letter-spacing: 0.1em;
+  }
+
+  .delivery-demo h2 {
+    margin: 0;
+    color: #f4f7ff;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+  }
+
+  .delivery-description {
+    margin: 14px 0 24px;
+    color: #b0bed3;
+    font-size: 0.83rem;
+  }
+
+  .pause-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .pause-label {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 6px 11px;
+    border: 1px solid #425574;
+    border-radius: 6px;
+    color: #d3def0;
+    font-size: 0.72rem;
+    cursor: pointer;
+  }
+
+  .pause-toggle:focus-visible ~ .delivery-top .pause-label {
+    outline: 2px solid #9ec1ff;
+    outline-offset: 4px;
+  }
+
+  .resume-copy {
+    display: none;
+  }
+
+  .pause-toggle:checked ~ .delivery-top .pause-copy {
+    display: none;
+  }
+
+  .pause-toggle:checked ~ .delivery-top .resume-copy {
+    display: inline;
+  }
+
+  .pause-toggle:checked ~ .delivery-scene *,
+  .pause-toggle:checked ~ .delivery-scene *::before,
+  .pause-toggle:checked ~ .delivery-scene *::after {
+    animation-play-state: paused !important;
+  }
+
+  .build-stages {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .stage {
+    min-width: 0;
+    padding: 15px 9px 11px;
+    border: 1px solid #34445f;
+    border-radius: 9px;
+    background: #192840;
+    text-align: center;
+    animation: stage-focus var(--cycle) linear infinite;
+  }
+
+  .stage img {
+    display: block;
+    margin: 0 auto 10px;
+  }
+
+  .stage strong,
+  .stage > span {
+    display: block;
+  }
+
+  .stage strong {
+    font-size: 0.8rem;
+  }
+
+  .stage > span {
+    min-height: 36px;
+    margin-top: 5px;
+    color: #b0bed3;
+    font-size: 0.66rem;
+    line-height: 1.45;
+  }
+
+  .stage-docker {
+    animation-delay: 2s;
+  }
+
+  .stage-git {
+    animation-delay: 4s;
+  }
+
+  .stage-progress {
+    height: 3px;
+    margin-top: 13px;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #34445f;
+  }
+
+  .stage-progress i {
+    display: block;
+    height: 100%;
+    background: #83b2ff;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: progress var(--cycle) linear infinite;
+  }
+
+  .stage-docker .stage-progress i {
+    animation-delay: 2s;
+  }
+
+  .stage-git .stage-progress i {
+    animation-delay: 4s;
+  }
+
+  .connection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    color: #acbad0;
+    font-size: 0.64rem;
+  }
+
+  .connection-line {
+    position: relative;
+    display: block;
+    flex-shrink: 0;
+    width: 2px;
+    height: 32px;
+    overflow: hidden;
+    background: #3a4b66;
+  }
+
+  .connection-line i {
+    position: absolute;
+    left: 0;
+    width: 2px;
+    height: 11px;
+    background: #a9ccff;
+    animation: travel 1.8s linear infinite;
+  }
+
+  .argo-stage {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 16px;
+    border: 1px solid #34445f;
+    border-radius: 9px;
+    background: #192840;
+    animation: stage-focus var(--cycle) linear 6s infinite;
+  }
+
+  .argo-stage img {
+    flex-shrink: 0;
+  }
+
+  .argo-stage strong,
+  .argo-stage div > span {
+    display: block;
+  }
+
+  .argo-stage strong {
+    font-size: 0.9rem;
+  }
+
+  .argo-stage div > span {
+    margin-top: 2px;
+    color: #b0bed3;
+    font-size: 0.7rem;
+  }
+
+  .sync-symbol {
+    margin-left: auto;
+    color: #91baff;
+    font-size: 1.7rem;
+    line-height: 1;
+    animation: sync var(--cycle) linear infinite;
+  }
+
+  .cluster {
+    padding: 16px;
+    border: 1px solid #496f9f;
+    border-radius: 10px;
+    background: #13243a;
+  }
+
+  .cluster-header,
+  .cluster-name,
+  .cluster-footer,
+  .linux-label {
+    display: flex;
+    align-items: center;
+  }
+
+  .cluster-header,
+  .cluster-footer {
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .cluster-name {
+    gap: 8px;
+    font-size: 0.87rem;
+  }
+
+  .cluster-label {
+    color: #a2b9db;
+    font: 0.57rem var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+
+  .cluster-description {
+    margin: 12px 0 0;
+    color: #b0bed3;
+    font-size: 0.67rem;
+  }
+
+  .pods {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+    margin-block: 19px;
+  }
+
+  .pod {
+    padding: 13px 6px;
+    border: 1px solid #457c77;
+    border-radius: 7px;
+    background: #173a3d;
+    text-align: center;
+    animation: deploy-one var(--cycle) linear infinite;
+  }
+
+  .pod-2 {
+    animation-name: deploy-two;
+  }
+
+  .pod-3 {
+    animation-name: deploy-three;
+  }
+
+  .pod-symbol {
+    display: grid;
+    grid-template-columns: repeat(2, 7px);
+    gap: 3px;
+    justify-content: center;
+    margin-bottom: 9px;
+  }
+
+  .pod-symbol span {
+    width: 7px;
+    height: 7px;
+    border: 1px solid #84ddc6;
+    border-radius: 1px;
+  }
+
+  .pod strong,
+  .pod-caption {
+    display: block;
+  }
+
+  .pod strong {
+    color: #d8fff3;
+    font: 0.73rem var(--font-mono);
+  }
+
+  .pod-caption {
+    margin-top: 3px;
+    color: #a6d5cc;
+    font-size: 0.63rem;
+  }
+
+  .cluster-footer {
+    padding-top: 12px;
+    border-top: 1px solid #34445f;
+  }
+
+  .linux-label {
+    gap: 7px;
+    color: #b0bed3;
+    font-size: 0.65rem;
+  }
+
+  .replica-label {
+    color: #b0bed3;
+    font: 0.6rem var(--font-mono);
+  }
+
+  .delivery-disclaimer {
+    margin: 17px 0 0;
+    color: #a0afc5;
+    font-size: 0.65rem;
+    text-align: center;
+  }
+
+  @keyframes stage-focus {
+    0%, 17%, 100% {
+      border-color: #34445f;
+      background: #192840;
+    }
+    3%, 14% {
+      border-color: #83b2ff;
+      background: #223b60;
+    }
+  }
+
+  @keyframes progress {
+    0% {
+      transform: scaleX(0);
+    }
+    15%, 94% {
+      transform: scaleX(1);
+    }
+    100% {
+      transform: scaleX(0);
+    }
+  }
+
+  @keyframes travel {
+    from {
+      transform: translateY(-12px);
+    }
+    to {
+      transform: translateY(36px);
+    }
+  }
+
+  @keyframes sync {
+    0%, 50% {
+      transform: rotate(0);
+    }
+    67%, 100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes deploy-one {
+    0%, 66%, 100% {
+      opacity: 0.3;
+      transform: translateY(5px);
+    }
+    72%, 94% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes deploy-two {
+    0%, 73%, 100% {
+      opacity: 0.3;
+      transform: translateY(5px);
+    }
+    79%, 94% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes deploy-three {
+    0%, 80%, 100% {
+      opacity: 0.3;
+      transform: translateY(5px);
+    }
+    86%, 94% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 420px) {
+    .delivery-demo {
+      padding: 18px;
+    }
+
+    .stage {
+      padding-inline: 5px;
+    }
+
+    .stage strong {
+      font-size: 0.73rem;
+    }
+
+    .connection {
+      font-size: 0.59rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .delivery-scene *,
+    .delivery-scene *::before,
+    .delivery-scene *::after {
+      animation: none !important;
+    }
+
+    .pod {
+      opacity: 1;
+      transform: none;
+    }
+
+    .stage-progress i {
+      transform: scaleX(1);
+    }
+
+    .pause-toggle,
+    .pause-label {
+      display: none;
+    }
+  }
+</style>
