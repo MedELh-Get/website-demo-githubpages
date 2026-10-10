@@ -82,14 +82,18 @@ summary:focus-visible {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 1.65rem;
   font-weight: 800;
   letter-spacing: -0.07em;
 }
 
-.brand span {
-  color: var(--accent);
-}
+.brand-wordmark { color: var(--text); }
+.brand-wordmark span { color: var(--accent); }
+.brand-monogram { display: block; flex-shrink: 0; border-radius: 7px; }
+.footer-inner .brand-monogram { width: 26px; height: 26px; }
 
 nav {
   display: flex;
@@ -467,33 +471,7 @@ h3 {
   text-transform: uppercase;
 }
 
-/* Closing and footer */
-
-.closing-section {
-  border-top: 1px solid var(--line);
-  background: var(--surface);
-}
-
-.closing {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  padding-block: 56px;
-}
-
-.closing h2 {
-  font-size: 1.9rem;
-}
-
-.closing p:last-child {
-  margin-bottom: 0;
-  color: var(--muted);
-}
-
-.closing .button {
-  flex-shrink: 0;
-}
+/* Footer */
 
 .site-footer {
   border-top: 1px solid var(--line);
@@ -508,6 +486,9 @@ h3 {
 }
 
 .footer-inner .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 1.3rem;
 }
 
@@ -602,12 +583,6 @@ h3 {
 
   .career-entry {
     gap: 16px;
-  }
-
-  .closing {
-    align-items: flex-start;
-    flex-direction: column;
-    padding-block: 48px;
   }
 
   .footer-inner {
