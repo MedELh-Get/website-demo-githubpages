@@ -1,0 +1,402 @@
+---
+const iconBase = import.meta.env.BASE_URL.replace(/\/?$/, "/") + "icons/";
+const steps = [
+  { name: "Push", tool: "Git", icon: "git/git-original.svg", title: "You push a change.", text: "A commit starts the delivery pipeline. The team can follow the update through each step." },
+  { name: "Check", tool: "GitLab CI", icon: "gitlab/gitlab-original.svg", title: "Checks catch problems early.", text: "Automated tests and code checks run before the application image is built." },
+  { name: "Package", tool: "Docker", icon: "docker/docker-original.svg", title: "The application is packaged.", text: "CI builds a Docker image and publishes it to a container registry, ready for deployment." },
+  { name: "Deploy", tool: "Argo CD + Kubernetes", icon: "argocd/argocd-original.svg", title: "The new version rolls out.", text: "The image reference is updated in Git. Argo CD syncs Kubernetes, and new application pods become ready." },
+  { name: "Enjoy", tool: "Your users", icon: null, title: "Users get the update.", text: "Ready application instances receive traffic. The team has a repeatable path for the next release." },
+];
+---
+
+<section id="delivery" class="delivery-section" aria-labelledby="delivery-heading">
+  <div class="container">
+    <header class="delivery-heading">
+      <div>
+        <p class="eyebrow">SOFTWARE DELIVERY, EXPLAINED</p>
+        <h2 id="delivery-heading">From code to the people using it.</h2>
+      </div>
+      <p>Follow one update from an engineer’s laptop to a working application.</p>
+    </header>
+
+    <release-story data-phase="4" data-playing="false">
+      <div class="delivery-toolbar">
+        <span class="illustration-label">Illustrated workflow</span>
+        <button class="delivery-play" type="button" data-play hidden>
+          <span data-play-symbol aria-hidden="true">↻</span>
+          <span data-play-label>Replay story</span>
+        </button>
+      </div>
+
+      <div class="delivery-canvas" aria-hidden="true">
+        <div class="delivery-route route-in"><span></span></div>
+        <div class="delivery-route route-out"><span></span></div>
+
+        <div class="delivery-actor actor-engineer">
+          <svg viewBox="0 0 300 290" fill="none" focusable="false">
+            <ellipse cx="146" cy="248" rx="115" ry="10" fill="#eef2f8" />
+            <rect x="146" y="40" width="113" height="39" rx="10" fill="#edf3ff" />
+            <path d="m158 79-9 10V76" fill="#edf3ff" />
+            <text x="165" y="65" class="svg-code" fill="#2458cf">git push</text>
+            <path d="M59 159c0-19 14-35 33-35h5c19 0 34 16 34 35v61H59z" fill="#dce6fb" stroke="#17263d" stroke-width="2" />
+            <path d="M73 221v22m45-22 5 22" stroke="#17263d" stroke-width="12" stroke-linecap="round" />
+            <path d="M59 248h29m19 0h30" stroke="#17263d" stroke-width="6" stroke-linecap="round" />
+            <path d="M90 114v15c5 5 10 5 15 0v-17" fill="#efc8ac" stroke="#17263d" stroke-width="2" />
+            <path d="M67 88c0-23 14-34 32-34s30 13 30 32v14c0 17-13 30-30 30s-32-16-32-34z" fill="#f1d2bb" stroke="#17263d" stroke-width="2" />
+            <path d="M67 91c-10-20 0-43 23-43 10 0 15 4 20 8 16-2 23 9 19 27-9-2-19-8-23-14-7 12-22 17-39 16z" fill="#17263d" />
+            <circle cx="104" cy="94" r="2.2" fill="#17263d" />
+            <path d="m118 96 4 9h-7" stroke="#17263d" stroke-width="1.6" stroke-linecap="round" />
+            <path class="engineer-neutral" d="M101 113h10" stroke="#17263d" stroke-width="1.8" stroke-linecap="round" />
+            <path class="engineer-happy" d="M99 109q6 9 13 0" stroke="#17263d" stroke-width="1.8" stroke-linecap="round" />
+            <path d="m80 158 19 30 58 6" stroke="#17263d" stroke-width="15" stroke-linecap="round" />
+            <path d="m80 158 19 30 58 6" stroke="#dce6fb" stroke-width="11" stroke-linecap="round" />
+            <path d="m146 193 15 2" stroke="#efc8ac" stroke-width="10" stroke-linecap="round" />
+            <path d="M38 212h228m-211 0v31m194-31v31" stroke="#17263d" stroke-width="2.5" stroke-linecap="round" />
+            <path d="m160 129 86 0-15 76h-87z" fill="white" stroke="#17263d" stroke-width="2" stroke-linejoin="round" />
+            <path d="m151 204-17 5h103l-6-5" fill="#c8d4e6" stroke="#17263d" stroke-width="2" stroke-linejoin="round" />
+            <path d="m186 155-10 9 7 8m25-17 7 9-10 8m-11-19-6 22" stroke="#2458cf" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            <g class="engineer-happy">
+              <circle cx="237" cy="103" r="15" fill="#e0f3eb" />
+              <path d="m230 103 5 5 9-10" stroke="#22745c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+          </svg>
+          <p class="actor-label">The engineer</p>
+        </div>
+
+        <div class="delivery-actor actor-pipeline">
+          <svg viewBox="0 0 360 290" fill="none" focusable="false">
+            <rect x="25" y="40" width="310" height="202" rx="13" fill="white" stroke="#dce3ed" stroke-width="1.6" />
+            <path d="M25 80h310" stroke="#dce3ed" />
+            <circle cx="44" cy="60" r="3.5" fill="#d5deeb" />
+            <circle cx="57" cy="60" r="3.5" fill="#d5deeb" />
+            <circle cx="70" cy="60" r="3.5" fill="#d5deeb" />
+            <text x="95" y="64" class="svg-small" fill="#536176">delivery / release</text>
+            <g data-visual="0" hidden>
+              <path d="M89 117v65m0-48c55 0 67 46 115 46" stroke="#bdccea" stroke-width="3" />
+              <circle cx="89" cy="118" r="8" fill="white" stroke="#2458cf" stroke-width="3" />
+              <circle cx="89" cy="182" r="8" fill="white" stroke="#2458cf" stroke-width="3" />
+              <circle cx="207" cy="180" r="8" fill="#2458cf" />
+              <text x="180" y="218" text-anchor="middle" class="svg-label" fill="#536176">A new commit arrives</text>
+            </g>
+            <g data-visual="1" hidden>
+              {["Code checks", "Automated tests", "Security checks"].map((label, index) => (
+                <g class="check-row" style={"--delay: " + index * 450 + "ms"}>
+                  <circle cx="60" cy={112 + index * 41} r="11" fill="#e0f3eb" />
+                  <path d={"M55 " + (112 + index * 41) + "l4 4 7-8"} stroke="#22745c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <text x="82" y={117 + index * 41} class="svg-label" fill="#17263d">{label}</text>
+                  <text x="299" y={117 + index * 41} text-anchor="end" class="svg-small" fill="#22745c">pass</text>
+                </g>
+              ))}
+            </g>
+            <g data-visual="2" hidden>
+              <path d="m145 115 35-18 35 18v45l-35 20-35-20z" fill="#edf3ff" stroke="#2458cf" stroke-width="2" stroke-linejoin="round" />
+              <path d="m145 115 35 20 35-20m-35 20v45m-18-74 35 20v18" stroke="#2458cf" stroke-width="2" stroke-linejoin="round" />
+              <text x="180" y="206" text-anchor="middle" class="svg-code" fill="#17263d">application:v2</text>
+              <text x="180" y="226" text-anchor="middle" class="svg-small" fill="#536176">published to the registry</text>
+            </g>
+            <g data-visual="3" hidden>
+              <text x="180" y="106" text-anchor="middle" class="svg-small" fill="#536176">Git manifests → Argo CD → Kubernetes</text>
+              {[0, 1, 2].map((pod) => (
+                <g class="rollout-pod" style={"--delay: " + pod * 450 + "ms"}>
+                  <rect x={70 + pod * 77} y="124" width="64" height="57" rx="9" fill="#edf3ff" stroke="#b5c9ed" />
+                  <path d={"m" + (92 + pod * 77) + " 147 10-6 10 6v12l-10 6-10-6z"} stroke="#2458cf" stroke-width="1.5" />
+                  <text x={102 + pod * 77} y="199" text-anchor="middle" class="svg-small" fill="#22745c">ready</text>
+                </g>
+              ))}
+              <text x="180" y="225" text-anchor="middle" class="svg-small" fill="#536176">New instances pass readiness checks</text>
+            </g>
+            <g data-visual="4">
+              <circle cx="180" cy="139" r="32" fill="#e0f3eb" />
+              <path d="m164 139 11 11 23-25" stroke="#22745c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+              <text x="180" y="198" text-anchor="middle" class="svg-label" fill="#17263d">Release complete</text>
+              <text x="180" y="221" text-anchor="middle" class="svg-small" fill="#536176">Ready for the next change</text>
+            </g>
+          </svg>
+          <p class="actor-label">The delivery pipeline</p>
+        </div>
+
+        <div class="delivery-actor actor-users">
+          <svg viewBox="0 0 300 290" fill="none" focusable="false">
+            <rect x="28" y="45" width="247" height="152" rx="12" fill="white" stroke="#b9c8de" stroke-width="1.5" />
+            <path d="M28 76h247" stroke="#dce3ed" />
+            <circle cx="45" cy="60" r="3" fill="#b9c8de" />
+            <circle cx="56" cy="60" r="3" fill="#b9c8de" />
+            <text x="73" y="65" class="svg-small" fill="#536176">Your application</text>
+            <rect x="43" y="91" width="49" height="88" rx="5" fill="#f2f5fa" />
+            <path d="M53 106h27m-27 13h20m-20 13h24" stroke="#c5d1e2" stroke-width="3" stroke-linecap="round" />
+            <g class="app-before">
+              <rect x="107" y="94" width="102" height="7" rx="3" fill="#c9d3e2" />
+              <rect x="107" y="113" width="139" height="5" rx="2" fill="#e2e8f1" />
+              <rect x="107" y="125" width="118" height="5" rx="2" fill="#e2e8f1" />
+              <rect x="107" y="148" width="93" height="25" rx="5" fill="#edf3ff" />
+              <text x="116" y="165" class="svg-small" fill="#536176">Current version</text>
+            </g>
+            <g class="app-after">
+              <rect x="105" y="91" width="154" height="89" rx="7" fill="#eaf5ef" />
+              <circle cx="130" cy="115" r="11" fill="#22745c" />
+              <path d="m125 115 4 4 7-8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <text x="148" y="119" class="svg-small" fill="#22745c">Update delivered</text>
+              <text x="118" y="153" class="svg-label" fill="#17263d">Ready to use.</text>
+              <path d="M118 165h93" stroke="#b9d9c8" stroke-width="4" stroke-linecap="round" />
+            </g>
+            <ellipse cx="155" cy="270" rx="90" ry="6" fill="#eef2f8" />
+            <path d="M80 266v-14c0-13 11-22 26-22s26 9 26 22v14" fill="#dce6fb" stroke="#17263d" stroke-width="1.5" />
+            <circle cx="106" cy="216" r="19" fill="#ecc6a7" stroke="#17263d" stroke-width="1.5" />
+            <path d="M87 212c-2-15 7-23 20-23 14 0 22 11 18 24-8-2-17-8-20-13-4 7-10 10-18 12" fill="#17263d" />
+            <circle cx="99" cy="216" r="1.6" fill="#17263d" /><circle cx="113" cy="216" r="1.6" fill="#17263d" />
+            <path class="users-neutral" d="M101 226h10" stroke="#17263d" stroke-width="1.6" stroke-linecap="round" />
+            <path class="users-happy" d="M99 223q7 10 14 0" stroke="#17263d" stroke-width="1.6" stroke-linecap="round" />
+            <path d="M169 266v-14c0-13 11-22 26-22s26 9 26 22v14" fill="#f1e1cf" stroke="#17263d" stroke-width="1.5" />
+            <path d="M175 208c0-16 8-24 21-24 15 0 24 12 22 29l4 27h-51z" fill="#40382f" />
+            <circle cx="196" cy="215" r="18" fill="#bd8c6d" stroke="#17263d" stroke-width="1.5" />
+            <path d="M179 204c7-2 13-8 17-14 4 7 11 12 18 14" fill="#40382f" />
+            <circle cx="190" cy="216" r="1.6" fill="#17263d" /><circle cx="202" cy="216" r="1.6" fill="#17263d" />
+            <path class="users-neutral" d="M191 225h10" stroke="#17263d" stroke-width="1.6" stroke-linecap="round" />
+            <path class="users-happy" d="M189 222q7 10 14 0" stroke="#17263d" stroke-width="1.6" stroke-linecap="round" />
+            <g class="users-happy delight-mark" stroke="#22745c" stroke-width="2" stroke-linecap="round">
+              <path d="m69 204-7-5m15-4-2-8m159 20 8-5m-18-8 2-7" />
+            </g>
+          </svg>
+          <p class="actor-label">The people using your app</p>
+        </div>
+      </div>
+
+      <ol class="delivery-steps" aria-label="Explore the delivery steps">
+        {steps.map((step, index) => (
+          <li>
+            <button type="button" data-step={index} aria-current={index === 4 ? "step" : undefined} aria-controls="delivery-caption" disabled>
+              <span class="step-name"><span class="step-number" aria-hidden="true">{index + 1}</span>{step.name}</span>
+              <span class="step-tool">
+                {step.icon ? <img src={iconBase + step.icon} alt="" width="17" height="17" loading="lazy" /> : <span class="user-symbol" aria-hidden="true">☺</span>}
+                {step.name === "Deploy" && <img src={iconBase + "kubernetes/kubernetes-original.svg"} alt="" width="17" height="17" loading="lazy" />}
+                {step.tool}
+              </span>
+            </button>
+          </li>
+        ))}
+      </ol>
+
+      <div class="delivery-caption" id="delivery-caption">
+        <div class="caption-copy">
+          {steps.map((step, index) => (
+            <div data-caption={index} hidden={index !== 4}>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          ))}
+        </div>
+        <a class="delivery-contact" href="#contact">Let’s talk about your project <span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="delivery-announcement" data-announcement role="status" aria-live="polite"></p>
+    </release-story>
+  </div>
+</section>
+
+<script>
+  class ReleaseStory extends HTMLElement {
+    private phase = 0;
+    private playing = false;
+    private started = false;
+    private visible = false;
+    private timer: number | undefined;
+    private observer: IntersectionObserver | undefined;
+    private events = new AbortController();
+    private motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    connectedCallback() {
+      this.events = new AbortController();
+      const options = { signal: this.events.signal };
+      this.phase = this.motion.matches ? 4 : 0;
+      const play = this.querySelector<HTMLButtonElement>("[data-play]")!;
+      play.hidden = false;
+
+      play.addEventListener("click", () => {
+        if (this.playing) {
+          this.playing = false;
+        } else {
+          if (this.phase === 4) this.phase = 0;
+          this.started = true;
+          this.playing = true;
+        }
+        this.render();
+        this.schedule();
+        this.announce();
+      }, options);
+
+      this.querySelectorAll<HTMLButtonElement>("[data-step]").forEach((button) => {
+        button.disabled = false;
+        button.addEventListener("click", () => {
+          this.phase = Number(button.dataset.step);
+          this.started = true;
+          this.playing = false;
+          this.render();
+          this.schedule();
+          this.announce();
+        }, options);
+      });
+
+      this.motion.addEventListener("change", () => {
+        if (this.motion.matches) {
+          this.phase = 4;
+          this.playing = false;
+        }
+        this.render();
+        this.schedule();
+      }, options);
+
+      document.addEventListener("visibilitychange", () => {
+        this.render();
+        this.schedule();
+      }, options);
+
+      this.observer = new IntersectionObserver((entries) => {
+        this.visible = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.2;
+        if (this.visible && !this.started && !this.motion.matches) {
+          this.started = true;
+          this.playing = true;
+        }
+        this.render();
+        this.schedule();
+      }, { threshold: 0.2 });
+      this.observer.observe(this);
+      this.render();
+    }
+
+    disconnectedCallback() {
+      window.clearTimeout(this.timer);
+      this.observer?.disconnect();
+      this.events.abort();
+    }
+
+    private schedule() {
+      window.clearTimeout(this.timer);
+      if (!this.playing || !this.visible || document.hidden) return;
+      this.timer = window.setTimeout(() => {
+        this.phase = Math.min(this.phase + 1, 4);
+        if (this.phase === 4) this.playing = false;
+        this.render();
+        if (this.phase === 4) this.announce();
+        this.schedule();
+      }, 3200);
+    }
+
+    private render() {
+      this.dataset.phase = String(this.phase);
+      this.dataset.playing = String(this.playing && this.visible && !document.hidden);
+      this.querySelectorAll<HTMLElement>("[data-caption], [data-visual]").forEach((item) => {
+        const phase = Number(item.getAttribute("data-caption") ?? item.getAttribute("data-visual"));
+        item.toggleAttribute("hidden", phase !== this.phase);
+      });
+      this.querySelectorAll<HTMLButtonElement>("[data-step]").forEach((button, index) => {
+        if (index === this.phase) button.setAttribute("aria-current", "step");
+        else button.removeAttribute("aria-current");
+        button.classList.toggle("is-complete", index < this.phase);
+      });
+      const label = this.playing ? "Pause story" : this.phase === 4 ? "Replay story" : this.started ? "Continue story" : "Play story";
+      this.querySelector("[data-play-label]")!.textContent = label;
+      this.querySelector("[data-play-symbol]")!.textContent = this.playing ? "Ⅱ" : this.phase === 4 ? "↻" : "▶";
+    }
+
+    private announce() {
+      const title = this.querySelector<HTMLElement>("[data-caption='" + this.phase + "'] h3")?.textContent;
+      this.querySelector("[data-announcement]")!.textContent = "Step " + (this.phase + 1) + " of 5. " + (title ?? "");
+    }
+  }
+
+  if (!customElements.get("release-story")) customElements.define("release-story", ReleaseStory);
+</script>
+
+<style>
+  .delivery-section { padding-block: 64px 76px; border-top: 1px solid var(--line); }
+  .delivery-heading { display: flex; align-items: end; justify-content: space-between; gap: 36px; margin-bottom: 30px; }
+  .delivery-heading h2 { max-width: 620px; margin: 0; }
+  .delivery-heading > p { max-width: 270px; margin: 0; color: var(--muted); font-size: .9rem; }
+  release-story { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: #fbfcfe; }
+  [hidden] { display: none !important; }
+  .delivery-toolbar { min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 24px 0; }
+  .illustration-label { color: var(--muted); font-family: var(--font-mono); font-size: .7rem; }
+  .delivery-play { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 13px; border: 1px solid var(--line); border-radius: 6px; background: white; color: var(--text); font: inherit; font-size: .78rem; cursor: pointer; }
+  .delivery-play:hover { border-color: var(--accent); color: var(--accent); }
+  button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+  .delivery-canvas { position: relative; display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 18px; align-items: start; padding: 0 22px 26px; isolation: isolate; }
+  .delivery-actor { min-width: 0; position: relative; }
+  .delivery-actor svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .actor-label { margin: 0; text-align: center; color: var(--muted); font-size: .76rem; }
+  .svg-code { font-family: var(--font-mono); font-size: 14px; }
+  .svg-label { font-family: var(--font-body); font-size: 15px; font-weight: 600; }
+  .svg-small { font-family: var(--font-body); font-size: 11px; }
+  .delivery-route { position: absolute; z-index: -1; top: 43%; width: 9%; height: 1px; background: #ccd8eb; }
+  .route-in { left: 25%; }
+  .route-out { right: 24%; }
+  .delivery-route span { position: absolute; width: 7px; height: 7px; top: -3px; border-radius: 50%; background: var(--accent); opacity: 0; }
+  [data-phase="0"] .route-in span,
+  [data-phase="3"] .route-out span { animation: move-packet 1.8s ease-in-out infinite; }
+  .engineer-happy, .users-happy, .app-after { opacity: 0; transition: opacity 350ms ease; }
+  .engineer-neutral, .users-neutral, .app-before { opacity: 1; transition: opacity 250ms ease; }
+  [data-phase="4"] .engineer-happy,
+  [data-phase="4"] .users-happy,
+  [data-phase="4"] .app-after { opacity: 1; }
+  [data-phase="4"] .engineer-neutral,
+  [data-phase="4"] .users-neutral,
+  [data-phase="4"] .app-before { opacity: 0; }
+  [data-playing="true"][data-phase="1"] .check-row,
+  [data-playing="true"][data-phase="3"] .rollout-pod { animation: reveal-result 600ms ease both; animation-delay: var(--delay); }
+  [data-playing="false"] .delivery-canvas * { animation-play-state: paused; }
+  .delivery-steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; margin: 0; padding: 0 22px; list-style: none; background: white; border-top: 1px solid var(--line); }
+  .delivery-steps li { min-width: 0; }
+  .delivery-steps button { position: relative; width: 100%; height: 100%; min-height: 85px; display: grid; align-content: start; gap: 9px; padding: 16px 10px; border: 0; border-top: 3px solid transparent; background: transparent; color: var(--muted); text-align: left; font: inherit; cursor: pointer; }
+  .delivery-steps button:disabled { cursor: default; }
+  .delivery-steps button[aria-current] { border-top-color: var(--accent); color: var(--accent); }
+  .delivery-steps button:hover { background: var(--surface); }
+  .step-name { display: flex; align-items: center; gap: 8px; font-size: .87rem; font-weight: 600; }
+  .step-number { display: inline-grid; place-items: center; width: 21px; height: 21px; flex-shrink: 0; border-radius: 50%; background: var(--surface); color: var(--muted); font-family: var(--font-mono); font-size: .65rem; }
+  [aria-current] .step-number { background: var(--accent); color: white; }
+  .is-complete .step-number { background: #e0f3eb; color: #22745c; }
+  .step-tool { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: .68rem; line-height: 1.4; }
+  .step-tool img { flex-shrink: 0; object-fit: contain; }
+  .user-symbol { width: 17px; text-align: center; color: #22745c; font-size: 18px; line-height: 1; }
+  .delivery-caption { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 25px 32px; border-top: 1px solid var(--line); background: white; }
+  .caption-copy { min-height: 90px; max-width: 680px; }
+  .caption-copy h3 { margin-bottom: 7px; font-size: 1.13rem; }
+  .caption-copy p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+  .delivery-contact { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; max-width: 210px; flex-shrink: 0; color: var(--accent); font-size: .83rem; font-weight: 600; text-underline-offset: 4px; }
+  .delivery-contact:hover { text-decoration: underline; }
+  .delivery-announcement { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  @keyframes move-packet { 0% { left: 0; opacity: 0; } 15%, 80% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+  @keyframes reveal-result { from { opacity: .15; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 900px) {
+    .delivery-heading { align-items: start; flex-direction: column; gap: 14px; }
+    .delivery-heading > p { max-width: 580px; }
+    .delivery-canvas { gap: 0; padding-inline: 12px; }
+    .delivery-caption { flex-direction: column; align-items: start; gap: 12px; }
+    .delivery-contact { max-width: none; }
+    .caption-copy { min-height: 98px; }
+  }
+
+  @media (max-width: 620px) {
+    .delivery-section { padding-block: 48px; }
+    .delivery-toolbar { padding-inline: 15px; }
+    .delivery-canvas { display: block; min-height: 315px; padding: 0 16px 18px; }
+    .delivery-actor { display: none; max-width: 330px; margin-inline: auto; }
+    .delivery-actor svg { height: 270px; }
+    [data-phase="0"] .actor-engineer,
+    [data-phase="1"] .actor-pipeline,
+    [data-phase="2"] .actor-pipeline,
+    [data-phase="3"] .actor-pipeline,
+    [data-phase="4"] .actor-users { display: block; }
+    .delivery-route { display: none; }
+    .delivery-steps { padding-inline: 8px; }
+    .delivery-steps button { min-height: 77px; padding: 12px 2px; }
+    .step-name { flex-direction: column; gap: 6px; font-size: .7rem; }
+    .step-tool { display: none; }
+    .delivery-caption { padding: 22px 18px; }
+    .caption-copy { min-height: 142px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .delivery-canvas *, .delivery-play { animation: none !important; transition: none !important; }
+    .delivery-route span { display: none; }
+  }
+</style>

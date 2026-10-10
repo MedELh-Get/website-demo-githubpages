@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import InfrastructureStories from "../components/InfrastructureStories.astro";
 import TechnicalSkills from "../components/TechnicalSkills.astro";
 import AboutStory from "../components/AboutStory.astro";
+import DeliveryJourney from "../components/DeliveryJourney.astro";
+import ContactSection from "../components/ContactSection.astro";
 
 const iconBase =
   "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons";
@@ -153,8 +155,8 @@ const experiences = [
           View my projects <span aria-hidden="true">↗</span>
         </a>
 
-        <a class="button button-secondary" href="#about">
-          Meet Mohamed
+        <a class="button button-secondary" href="#contact">
+          Let’s collaborate
         </a>
       </div>
 
@@ -194,6 +196,8 @@ const experiences = [
   </section>
 
   <AboutStory />
+
+  <DeliveryJourney />
 
   <section
     id="projects"
@@ -362,22 +366,5 @@ const experiences = [
     </div>
   </section>
 
-  <section class="closing-section">
-    <div class="closing container">
-      <div>
-        <p class="eyebrow">CODE & EXPERIMENTS</p>
-        <h2>Explore more of my work.</h2>
-        <p>Find my repositories and technical projects on GitHub.</p>
-      </div>
-
-      <a
-        class="button button-primary"
-        href="https://github.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Visit my GitHub <span aria-hidden="true">↗</span>
-      </a>
-    </div>
-  </section>
+  <ContactSection />
 </Layout>

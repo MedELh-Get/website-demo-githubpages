@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>mohstack — MS</title>
+  <rect width="64" height="64" rx="14" fill="#17263d"/>
+  <path d="M10 44V20h5l7 11 7-11h5v24h-6V31l-6 9-6-9v13z" fill="#ffffff"/>
+  <path d="M54 22c-3-2-5-3-8-3-6 0-10 3-10 7 0 5 4 7 9 8 3 1 4 2 4 3 0 2-2 3-4 3-3 0-6-1-9-3v6c3 2 6 3 10 3 6 0 10-3 10-8 0-5-4-7-9-8-3-1-5-2-5-3 0-2 2-3 4-3 3 0 5 1 8 3z" fill="#91b2ff"/>
+</svg>
