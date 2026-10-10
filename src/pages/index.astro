@@ -1,71 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import InfrastructureStories from "../components/InfrastructureStories.astro";
+import TechnicalSkills from "../components/TechnicalSkills.astro";
+import AboutStory from "../components/AboutStory.astro";
 
 const iconBase =
   "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons";
-
-const skillGroups = [
-  {
-    title: "Containers & Kubernetes",
-    tools: ["Docker", "Kubernetes", "Helm", "Ingress"],
-  },
-  {
-    title: "Infrastructure & Automation",
-    tools: ["Terraform", "Ansible", "Jinja2"],
-  },
-  {
-    title: "CI/CD & GitOps",
-    tools: [
-      "Git",
-      "GitLab CI/CD",
-      "GitHub Actions",
-      "Jenkins",
-      "Argo CD",
-    ],
-  },
-  {
-    title: "Systems & Virtualization",
-    tools: ["Linux", "Windows", "Proxmox", "KVM/QEMU"],
-  },
-  {
-    title: "Scripting & Development",
-    tools: ["Python", "Bash / Shell", "Perl", "JavaScript", "PHP"],
-  },
-  {
-    title: "Networking",
-    tools: ["TCP/IP", "NAT / DNAT", "DNS", "DHCP", "OSPF", "BGP"],
-  },
-  {
-    title: "Security & Secrets",
-    tools: ["HashiCorp Vault", "SSH", "TLS / SSL", "RBAC"],
-  },
-  {
-    title: "Monitoring",
-    tools: ["Prometheus", "Grafana"],
-  },
-  {
-    title: "Web & Application Servers",
-    tools: ["NGINX", "HAProxy", "Tomcat"],
-  },
-  {
-    title: "Cloud & Databases",
-    tools: [
-      "AWS — EC2, S3, IAM",
-      "GCP",
-      "MySQL",
-      "PostgreSQL",
-    ],
-  },
-  {
-    title: "Quality & Artifacts",
-    tools: ["SonarQube", "JFrog Artifactory"],
-  },
-  {
-    title: "Ways of Working",
-    tools: ["Agile", "Jira", "Code review", "Technical documentation"],
-  },
-];
 
 const technologies = [
   { name: "Linux", icon: "linux/linux-original.svg" },
@@ -117,7 +57,7 @@ const experiences = [
     summary:
       "Part of the DevOps team, contributing to delivery automation and reproducible deployments.",
     highlight:
-      "Reduced pipeline execution time by approximately 50% through conditional Docker image builds.",
+      "Avoided unnecessary Docker image builds through conditional build rules in the delivery pipelines.",
     responsibilities: [
       "Containerized and versioned internal DevOps tools. Built GitLab CI/CD pipelines covering code analysis, linting, security checks, Docker image builds and publication.",
       "Automated deployments with Ansible and implemented GitOps with ArgoCD for approximately five applications across three Kubernetes clusters.",
@@ -199,15 +139,13 @@ const experiences = [
       </h1>
 
       <p class="hero-intro">
-        I build cloud infrastructure and automate software delivery.
-        My experience spans telecom environments at Huawei and DevOps
-        engineering at Opensee, where I worked on CI/CD pipelines,
-        Kubernetes deployments and monitoring.
+        I help teams set up cloud infrastructure, automate application
+        deployments and monitor what happens after a release.
       </p>
 
       <p class="hero-note">
-        I enjoy turning manual operations into repeatable processes—and
-        understanding what happens when things go wrong.
+        My background spans telecom infrastructure at Huawei and
+        DevOps engineering at Opensee.
       </p>
 
       <div class="hero-actions">
@@ -215,8 +153,8 @@ const experiences = [
           View my projects <span aria-hidden="true">↗</span>
         </a>
 
-        <a class="button button-secondary" href="#experience">
-          My experience
+        <a class="button button-secondary" href="#about">
+          Meet Mohamed
         </a>
       </div>
 
@@ -255,38 +193,7 @@ const experiences = [
     </div>
   </section>
 
-  <section
-    id="about"
-    class="section container"
-    aria-labelledby="about-heading"
-  >
-    <div class="about-grid">
-      <div class="section-heading">
-        <p class="eyebrow">ABOUT ME</p>
-        <h2 id="about-heading">Networks, cloud<br />and automation.</h2>
-      </div>
-
-      <div class="about-copy">
-        <p>
-          My background combines networking, cloud infrastructure and
-          DevOps. At Huawei, I worked on private cloud deployments
-          supporting 5G core services, from infrastructure installation
-          and network integration to production rollout. At Opensee,
-          I focused on delivery automation, GitOps and platform
-          observability.
-        </p>
-
-        <p>
-          Alongside my professional experience, I build practical projects
-          to deepen my skills: provisioning AWS infrastructure with
-          Terraform, deploying through Ansible and Systems Manager, and
-          testing robotics software through automated CI pipelines.
-          This portfolio documents those projects, including the decisions,
-          troubleshooting and lessons behind them.
-        </p>
-      </div>
-    </div>
-  </section>
+  <AboutStory />
 
   <section
     id="projects"
@@ -296,10 +203,10 @@ const experiences = [
     <div class="container">
       <div class="section-heading">
         <p class="eyebrow">SELECTED PROJECTS</p>
-        <h2 id="projects-heading">Engineering through practice.</h2>
+        <h2 id="projects-heading">Projects that show how I work.</h2>
         <p>
-          Projects exploring infrastructure, automated testing and
-          software delivery.
+          Personal projects covering cloud setup, automated delivery
+          and software validation.
         </p>
       </div>
 
@@ -381,38 +288,8 @@ const experiences = [
       }
     </div>
   </section>
------
-  <section
-    id="skills"
-    class="section section-tinted"
-    aria-labelledby="skills-heading"
-  >
-    <div class="container">
-      <div class="section-heading">
-        <p class="eyebrow">TECHNICAL SKILLS</p>
-        <h2 id="skills-heading">My technical toolkit.</h2>
-        <p>
-          Technologies used across professional work, personal projects
-          and ongoing learning.
-        </p>
-      </div>
-  
-      <div class="skills-grid">
-        {
-          skillGroups.map((group) => (
-            <article class="skill-group">
-              <h3>{group.title}</h3>
-  
-              <ul class="tag-list">
-                {group.tools.map((tool) => <li>{tool}</li>)}
-              </ul>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-  
+  <TechnicalSkills />
+
   <section
     id="certifications"
     class="section container"

@@ -1,0 +1,179 @@
+<section id="about" class="story" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="story-layout">
+      <header class="story-intro">
+        <p class="eyebrow">ABOUT MOHAMED</p>
+        <h2 id="about-heading">My work started<br /><span>with networks.</span></h2>
+        <p class="story-lead">
+          Today, I bring that infrastructure background to the way
+          applications are deployed, monitored and maintained.
+        </p>
+        <a class="story-link" href="#experience">
+          Read my full experience <span aria-hidden="true">↗</span>
+        </a>
+      </header>
+
+      <ol class="story-journey" aria-label="My path into DevOps">
+        <li class="story-chapter">
+          <p class="story-date">
+            <time datetime="2022-02">2022</time>–<time datetime="2024-05">2024</time>
+            <span aria-hidden="true"> / </span> Huawei
+          </p>
+          <h3>Getting services into production.</h3>
+          <p class="story-copy">
+            I helped deploy the private cloud infrastructure behind 5G services,
+            from installation and network integration to testing and production
+            rollout. That work gave me a practical understanding of the systems
+            an application depends on.
+          </p>
+        </li>
+
+        <li class="story-chapter">
+          <p class="story-date"><time datetime="2025">2025</time><span aria-hidden="true"> / </span> Opensee</p>
+          <h3>Making deployments repeatable.</h3>
+          <p class="story-copy">
+            At Opensee, I worked on the steps between a code change and a running
+            application: automated checks, container builds and Kubernetes
+            deployments. I also built a tool to monitor cloud backups and
+            alert the team when something needed attention.
+          </p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="story-today">
+      <div class="story-today-heading">
+        <p class="eyebrow">MOHSTACK · TODAY</p>
+        <h3>Where I can help.</h3>
+      </div>
+      <div class="story-offer">
+        <p>
+          Setting up an AWS environment, automating builds and deployments,
+          or adding monitoring and alerts. I document the setup so your team
+          can work with it.
+        </p>
+        <a class="story-link" href="#projects">
+          See how I approach these projects <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .story {
+    padding-block: clamp(56px, 7vw, 96px);
+    background: var(--background);
+  }
+
+  .story-layout,
+  .story-today {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.35fr);
+    gap: clamp(36px, 6vw, 88px);
+  }
+
+  .story-intro h2 {
+    margin-bottom: 24px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 3.3vw, 2.85rem);
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -0.035em;
+  }
+
+  .story-intro h2 span { color: var(--accent); }
+
+  .story-lead {
+    max-width: 33ch;
+    margin-bottom: 18px;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.8;
+  }
+
+  .story-journey {
+    position: relative;
+    padding: 0 0 0 28px;
+    margin: 5px 0 0;
+    list-style: none;
+  }
+
+  .story-journey::before {
+    content: "";
+    position: absolute;
+    inset: 8px auto 9px 3px;
+    width: 1px;
+    background: var(--line);
+  }
+
+  .story-chapter { position: relative; }
+  .story-chapter + .story-chapter { margin-top: 34px; }
+
+  .story-chapter::before {
+    content: "";
+    position: absolute;
+    left: -28px;
+    top: 7px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 5px var(--background);
+  }
+
+  .story-date {
+    margin-bottom: 9px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .story-date span { padding-inline: 6px; }
+
+  .story-chapter h3 {
+    margin-bottom: 10px;
+    font-size: 1.17rem;
+    font-weight: 600;
+  }
+
+  .story-copy {
+    max-width: 65ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.96rem;
+    line-height: 1.8;
+  }
+
+  .story-today {
+    margin-top: 42px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+
+  .story-today .eyebrow { margin-bottom: 9px; }
+  .story-today h3 { margin: 0; font-size: 1.4rem; font-weight: 600; }
+  .story-offer p { margin: 0 0 12px; font-size: 1.04rem; line-height: 1.75; }
+
+  .story-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    color: var(--accent);
+    font-size: 0.84rem;
+    font-weight: 600;
+    text-underline-offset: 5px;
+  }
+
+  .story-link:hover { text-decoration: underline; }
+
+  @media (max-width: 800px) {
+    .story-layout,
+    .story-today { grid-template-columns: 1fr; gap: 28px; }
+    .story-intro { max-width: 560px; }
+    .story-lead { max-width: 52ch; }
+    .story-today { gap: 16px; margin-top: 34px; }
+    .story-offer p { font-size: 1rem; }
+  }
+</style>
