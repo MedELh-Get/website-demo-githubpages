@@ -1,4 +1,6 @@
 ---
+import EducationSection from "../components/EducationSection.astro";
+import CertificationsSection from "../components/CertificationsSection.astro";
 import Layout from "../layouts/Layout.astro";
 import InfrastructureStories from "../components/InfrastructureStories.astro";
 import TechnicalSkills from "../components/TechnicalSkills.astro";
@@ -150,16 +152,6 @@ const experiences = [
         DevOps engineering at Opensee.
       </p>
 
-      <div class="hero-actions">
-        <a class="button button-primary" href="#projects">
-          View my projects <span aria-hidden="true">↗</span>
-        </a>
-
-        <a class="button button-secondary" href="#contact">
-          Let’s collaborate
-        </a>
-      </div>
-
       <div class="hero-background">
         <span>Professional background</span>
         <p>Opensee <span aria-hidden="true">/</span> Huawei</p>
@@ -294,77 +286,8 @@ const experiences = [
   </section>
   <TechnicalSkills />
 
-  <section
-    id="certifications"
-    class="section container"
-    aria-labelledby="certifications-heading"
-  >
-    <div class="section-heading">
-      <p class="eyebrow">EDUCATION & LEARNING</p>
-      <h2 id="certifications-heading">Education & Certifications.</h2>
-      <p>
-        Academic qualifications, professional training and current preparation.
-      </p>
-    </div>
-  
-    <div class="education-grid">
-      <div>
-        <h3 class="education-column-title">Education</h3>
-  
-        <article class="qualification">
-          <p class="qualification-date">2024 — 2025</p>
-          <h4>Master 2 en Technologies Innovantes</h4>
-          <p class="qualification-institution">Université Paris-Saclay</p>
-        </article>
-  
-        <article class="qualification">
-          <p class="qualification-date">2019 — 2022</p>
-          <h4>Diplôme d’ingénieur en Réseaux et Télécommunications</h4>
-          <p class="qualification-institution">ENSA</p>
-        </article>
-      </div>
-  
-      <div>
-        <h3 class="education-column-title">
-          Certifications & Training
-        </h3>
-  
-        <article class="qualification">
-          <span class="qualification-status preparation">
-            In preparation
-          </span>
-  
-          <h4>Certified Kubernetes Administrator</h4>
-          <p class="qualification-institution">CKA</p>
-          <p class="qualification-description">
-            Practical preparation focused on Kubernetes cluster
-            administration, workloads and troubleshooting.
-          </p>
-        </article>
-  
-        <article class="qualification">
-          <span class="qualification-status">Internal training</span>
-          <h4>Cloud Technologies</h4>
-          <p class="qualification-institution">Huawei</p>
-        </article>
-      </div>
-    </div>
-  
-    <div class="personal-details">
-      <div>
-        <h3>Languages</h3>
-        <ul class="language-list">
-          <li><span>French</span><strong>C1</strong></li>
-          <li><span>English</span><strong>C1</strong></li>
-        </ul>
-      </div>
-  
-      <div>
-        <h3>Beyond engineering</h3>
-        <p>Outside of technology, I enjoy football.</p>
-      </div>
-    </div>
-  </section>
+  <EducationSection />
+  <CertificationsSection />
 
   <ContactSection />
 </Layout>

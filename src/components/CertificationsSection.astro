@@ -1,0 +1,51 @@
+<section id="certifications" class="section container ms-certifications" aria-labelledby="certifications-heading">
+  <header class="section-heading">
+    <p class="eyebrow">PROFESSIONAL DEVELOPMENT</p>
+    <h2 id="certifications-heading">Certifications &amp; training.</h2>
+    <p>What I’m preparing for and the training I’ve completed.</p>
+  </header>
+
+  <div class="ms-certification-grid">
+    <article class="ms-certification-card">
+      <div class="ms-card-top">
+        <span class="ms-category">Kubernetes · CKA</span>
+        <span class="ms-status ms-status-preparation">In preparation</span>
+      </div>
+      <h3>Certified Kubernetes Administrator</h3>
+      <p>Hands-on preparation in cluster administration, workloads and troubleshooting.</p>
+      <ul class="ms-tags" aria-label="Preparation topics">
+        <li>Cluster operations</li><li>Workloads</li><li>Troubleshooting</li>
+      </ul>
+    </article>
+
+    <article class="ms-certification-card">
+      <div class="ms-card-top">
+        <span class="ms-category">Huawei</span>
+        <span class="ms-status">Internal training</span>
+      </div>
+      <h3>Cloud Technologies</h3>
+      <p>Professional training completed at Huawei.</p>
+    </article>
+  </div>
+</section>
+
+<style>
+  .ms-certifications { padding-top: 18px; padding-bottom: 72px; }
+  .ms-certifications::before { content: ""; display: block; height: 1px; background: var(--line, #dce3ed); margin-bottom: 54px; }
+  .ms-certification-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .ms-certification-card { padding: 28px; border: 1px solid var(--line, #dce3ed); border-radius: 10px; background: var(--background, #fff); display: flex; flex-direction: column; }
+  .ms-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 26px; }
+  .ms-category { color: var(--accent, #2458cf); font-size: .76rem; font-weight: 600; }
+  .ms-status { border: 1px solid var(--line, #dce3ed); border-radius: 6px; background: var(--surface, #f5f7fb); padding: 5px 9px; color: var(--muted, #536176); font-size: .7rem; line-height: 1.5; }
+  .ms-status-preparation { background: #fff8ea; border-color: #f1dfb2; color: #805310; }
+  .ms-certification-card h3 { font-size: 1.3rem; line-height: 1.4; letter-spacing: -.02em; margin: 0 0 12px; }
+  .ms-certification-card > p { color: var(--muted, #536176); font-size: .9rem; line-height: 1.8; margin: 0 0 24px; }
+  .ms-tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: auto 0 0; list-style: none; }
+  .ms-tags li { background: var(--surface, #f5f7fb); border: 1px solid var(--line, #dce3ed); color: var(--muted, #536176); border-radius: 5px; padding: 4px 8px; font-size: .69rem; }
+  @media (max-width: 700px) {
+    .ms-certifications { padding-top: 12px; padding-bottom: 48px; }
+    .ms-certifications::before { margin-bottom: 34px; }
+    .ms-certification-grid { grid-template-columns: 1fr; }
+    .ms-certification-card { padding: 24px; }
+  }
+</style>

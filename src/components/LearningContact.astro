@@ -1,0 +1,112 @@
+---
+// Replace this placeholder with your own LinkedIn profile URL.
+const linkedinUrl = "https://www.linkedin.com/in/mohamed-el-404468206/";
+const email = "contact@mohstack.com";
+---
+
+<section id="certifications" class="ms-learning" aria-labelledby="ms-learning-title">
+  <div class="ms-wrap">
+    <header class="ms-heading">
+      <p class="ms-kicker">FOUNDATIONS & NEXT STEPS</p>
+      <h2 id="ms-learning-title">Built on knowledge.<br /><span>Driven by practice.</span></h2>
+      <p class="ms-intro">An engineering foundation, cloud experience and a commitment to keep learning.</p>
+    </header>
+
+    <div class="ms-grid">
+      <article class="ms-focus">
+        <div class="ms-focus-top"><span class="ms-kicker">CURRENT FOCUS</span><span class="ms-status"><i aria-hidden="true"></i> In preparation</span></div>
+        <div class="ms-emblem" aria-hidden="true">K8s<span>⎈</span></div>
+        <p class="ms-acronym">CKA</p>
+        <h3>Certified Kubernetes Administrator</h3>
+        <p class="ms-focus-copy">Building deeper, hands-on skills in cluster administration, workloads and troubleshooting.</p>
+        <ul class="ms-topics" aria-label="Study topics"><li>Cluster operations</li><li>Workloads</li><li>Troubleshooting</li></ul>
+        <div class="ms-focus-foot"><span class="ms-dot" aria-hidden="true"></span> Learning through hands-on labs</div>
+      </article>
+
+      <div class="ms-foundations">
+        <div class="ms-group-title"><h3>Academic foundation</h3><span>01 / EDUCATION</span></div>
+        <article class="ms-degree">
+          <div class="ms-degree-top"><span class="ms-school">Université Paris-Saclay</span><span class="ms-date">2024 — 2025</span></div>
+          <h4>Innovative Technologies</h4><p>Master’s degree · M2</p>
+        </article>
+        <article class="ms-degree">
+          <div class="ms-degree-top"><span class="ms-school">ENSA</span><span class="ms-date">2019 — 2022</span></div>
+          <h4>Networks & Telecommunications</h4><p>Engineering degree</p>
+        </article>
+        <article class="ms-training">
+          <div class="ms-training-icon" aria-hidden="true">↗</div>
+          <div><p class="ms-kicker">PROFESSIONAL LEARNING</p><h4>Cloud Technologies</h4><p>Huawei · Internal training</p></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="ms-contact" aria-labelledby="ms-contact-title">
+  <div class="ms-wrap ms-contact-inner">
+    <div class="ms-contact-copy"><p class="ms-kicker">LET’S CONNECT</p><h2 id="ms-contact-title">Have something<br />in mind?</h2><p>A cloud project, a delivery challenge or a role on your team?<br class="ms-desktop-break" /> I’d be happy to talk.</p></div>
+    <div class="ms-contact-links">
+      <a class="ms-contact-link" href={`mailto:${email}`}><span><small>START A CONVERSATION</small><strong>{email}</strong></span><span class="ms-link-arrow" aria-hidden="true">↗</span></a>
+      <a class="ms-contact-link ms-linkedin" href={linkedinUrl} target="_blank" rel="noopener noreferrer"><span><small>FIND ME ON LINKEDIN</small><strong>Let’s connect</strong></span><span class="ms-link-arrow" aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ms-learning,.ms-contact{font-family:var(--font-body,"Segoe UI",Arial,sans-serif);color:#17263d;box-sizing:border-box}
+  .ms-learning *,.ms-contact *{box-sizing:border-box}
+  .ms-learning{padding:100px 0;background:#fff;scroll-margin-top:32px}
+  .ms-wrap{width:min(1180px,calc(100% - 64px));margin-inline:auto}
+  .ms-kicker{font:600 11px/1.5 var(--font-mono,monospace);letter-spacing:.13em;color:#2458cf;margin:0 0 18px}
+  .ms-heading{max-width:740px;margin-bottom:44px}
+  .ms-heading h2{font-size:clamp(32px,4vw,49px);line-height:1.12;letter-spacing:-.045em;margin:0 0 20px;font-weight:650}
+  .ms-heading h2 span{color:#64748b}
+  .ms-intro{color:#536176;font-size:16px;line-height:1.7;margin:0;max-width:560px}
+  .ms-grid{display:grid;grid-template-columns:1fr 1.12fr;gap:38px;align-items:stretch}
+  .ms-focus{position:relative;overflow:hidden;background:#122848;color:#fff;border-radius:20px;padding:30px;display:flex;flex-direction:column;isolation:isolate}
+  .ms-focus:before{content:"";position:absolute;z-index:-1;width:300px;height:300px;right:-120px;top:90px;border:1px solid #ffffff12;border-radius:50%;box-shadow:0 0 0 40px #ffffff04,0 0 0 80px #ffffff03}
+  .ms-focus-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .ms-focus-top .ms-kicker{color:#b9ceef;margin:0}
+  .ms-status{display:inline-flex;align-items:center;gap:7px;font-size:11px;line-height:1.4;color:#fce0a3;background:#ffffff0b;border:1px solid #ffffff25;border-radius:30px;padding:7px 10px}
+  .ms-status i{width:5px;height:5px;border-radius:50%;background:#eabd69}
+  .ms-emblem{margin:32px 0 20px;border:1px solid #ffffff25;border-radius:13px;width:70px;height:62px;display:flex;align-items:center;justify-content:center;gap:5px;color:#c9deff;font:600 15px monospace;background:#ffffff08}
+  .ms-emblem span{font:30px/1 sans-serif}
+  .ms-acronym{font:500 11px monospace;letter-spacing:.16em;color:#9dbde9;margin:0 0 8px}
+  .ms-focus h3{font-size:28px;line-height:1.2;letter-spacing:-.025em;margin:0 0 17px;color:#fff}
+  .ms-focus-copy{font-size:14px;line-height:1.8;color:#c1d0e5;max-width:370px;margin:0 0 24px}
+  .ms-topics{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 28px;padding:0}
+  .ms-topics li{font-size:11px;line-height:1.5;border:1px solid #ffffff26;border-radius:6px;padding:5px 8px;color:#e3edfc}
+  .ms-focus-foot{display:flex;align-items:center;gap:8px;border-top:1px solid #ffffff20;padding-top:18px;margin-top:auto;font-size:12px;color:#b9ceef}
+  .ms-dot{width:6px;height:6px;border-radius:50%;background:#8cb8ff}
+  .ms-foundations{display:flex;flex-direction:column;gap:14px;padding:3px 0}
+  .ms-group-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:4px}
+  .ms-group-title h3{font-size:15px;margin:0;font-weight:600}
+  .ms-group-title>span{font:10px monospace;letter-spacing:.07em;color:#64748b}
+  .ms-degree{padding:25px 26px;background:#f7f9fc;border:1px solid #e4eaf2;border-radius:14px}
+  .ms-degree-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+  .ms-school{font-size:12px;font-weight:650;color:#2458cf}
+  .ms-date{font:11px monospace;color:#64748b}
+  .ms-degree h4,.ms-training h4{font-size:19px;line-height:1.4;letter-spacing:-.02em;margin:0 0 5px;font-weight:650}
+  .ms-degree p,.ms-training p:not(.ms-kicker){font-size:13px;line-height:1.6;color:#536176;margin:0}
+  .ms-training{display:flex;align-items:center;gap:18px;padding:23px 24px;margin-top:auto;border:1px solid #e4eaf2;border-radius:14px}
+  .ms-training-icon{width:40px;height:40px;flex-shrink:0;display:grid;place-items:center;background:#edf3ff;color:#2458cf;border-radius:10px;font-size:23px}
+  .ms-training .ms-kicker{font-size:9px;margin:0 0 5px;color:#64748b}
+  .ms-training h4{font-size:17px}
+  .ms-contact{background:#edf3ff;border-block:1px solid #dce5f5;padding:75px 0;scroll-margin-top:24px}
+  .ms-contact-inner{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:60px}
+  .ms-contact h2{font-size:clamp(34px,4vw,48px);line-height:1.08;letter-spacing:-.045em;margin:0 0 20px}
+  .ms-contact-copy>p:last-child{color:#536176;font-size:14px;line-height:1.8;margin:0}
+  .ms-contact-links{display:grid;gap:13px;min-width:0}
+  .ms-contact-link{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:23px 25px;background:#2458cf;color:#fff;text-decoration:none;border:1px solid #2458cf;border-radius:12px;transition:transform .2s,box-shadow .2s}
+  .ms-contact-link small{display:block;font:9px/1.5 var(--font-mono,monospace);letter-spacing:.1em;margin-bottom:8px}
+  .ms-contact-link strong{display:block;font-size:clamp(16px,2vw,22px);font-weight:550;overflow-wrap:anywhere;line-height:1.4}
+  .ms-link-arrow{font-size:25px;flex-shrink:0;transition:transform .2s}
+  .ms-linkedin{background:#fff;color:#17263d;border-color:#dce5f5}
+  .ms-linkedin small{color:#536176}
+  .ms-contact-link:hover{transform:translateY(-3px);box-shadow:0 8px 24px #17345b12}
+  .ms-contact-link:hover .ms-link-arrow{transform:translate(2px,-2px)}
+  .ms-contact-link:focus-visible{outline:3px solid #17263d;outline-offset:5px}
+  @media(max-width:800px){.ms-grid{grid-template-columns:1fr;gap:25px}.ms-contact-inner{grid-template-columns:1fr;gap:30px}.ms-learning{padding:65px 0}.ms-contact{padding:55px 0}.ms-training{margin-top:0}}
+  @media(max-width:480px){.ms-wrap{width:calc(100% - 36px)}.ms-focus{padding:24px}.ms-degree{padding:22px}.ms-group-title{align-items:flex-start;flex-direction:column;gap:4px}.ms-contact-link{padding:20px}.ms-desktop-break{display:none}}
+  @media(prefers-reduced-motion:reduce){.ms-contact-link,.ms-link-arrow{transition:none}.ms-contact-link:hover,.ms-contact-link:hover .ms-link-arrow{transform:none}}
+</style>

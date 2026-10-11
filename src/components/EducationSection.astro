@@ -1,0 +1,44 @@
+<section id="education" class="section container ms-education" aria-labelledby="education-heading">
+  <header class="section-heading">
+    <p class="eyebrow">ACADEMIC BACKGROUND</p>
+    <h2 id="education-heading">Education.</h2>
+    <p>Engineering and postgraduate studies.</p>
+  </header>
+
+  <div class="ms-education-grid">
+    <article class="ms-education-card">
+      <div class="ms-card-top">
+        <span class="ms-degree-type">Master’s degree · M2</span>
+        <span class="ms-date">2024 — 2025</span>
+      </div>
+      <h3>Innovative Technologies</h3>
+      <p class="ms-institution">Université Paris-Saclay</p>
+    </article>
+
+    <article class="ms-education-card">
+      <div class="ms-card-top">
+        <span class="ms-degree-type">Engineering degree</span>
+        <span class="ms-date">2019 — 2022</span>
+      </div>
+      <h3>Networks &amp; Telecommunications</h3>
+      <p class="ms-institution">ENSA</p>
+    </article>
+  </div>
+</section>
+
+<style>
+  .ms-education { padding-bottom: 58px; }
+  .ms-education-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .ms-education-card { padding: 28px; border: 1px solid var(--line, #dce3ed); border-radius: 10px; background: var(--background, #fff); }
+  .ms-card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
+  .ms-degree-type { color: var(--accent, #2458cf); font-size: .76rem; font-weight: 600; }
+  .ms-date { color: var(--muted, #536176); font-family: var(--font-mono, monospace); font-size: .73rem; white-space: nowrap; }
+  .ms-education-card h3 { font-size: 1.3rem; line-height: 1.4; letter-spacing: -.02em; margin: 0 0 12px; }
+  .ms-institution { color: var(--muted, #536176); font-size: .9rem; margin: 0; }
+  @media (max-width: 700px) {
+    .ms-education { padding-bottom: 38px; }
+    .ms-education-grid { grid-template-columns: 1fr; }
+    .ms-education-card { padding: 24px; }
+    .ms-card-top { margin-bottom: 20px; }
+  }
+</style>

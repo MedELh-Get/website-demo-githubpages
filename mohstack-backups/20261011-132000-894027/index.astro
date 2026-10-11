@@ -1,0 +1,272 @@
+---
+import HeroIntro from "../components/HeroIntro.astro";
+import EducationSection from "../components/EducationSection.astro";
+import CertificationsSection from "../components/CertificationsSection.astro";
+import Layout from "../layouts/Layout.astro";
+import InfrastructureStories from "../components/InfrastructureStories.astro";
+import TechnicalSkills from "../components/TechnicalSkills.astro";
+import AboutStory from "../components/AboutStory.astro";
+import DeliveryJourney from "../components/DeliveryJourney.astro";
+import ContactSection from "../components/ContactSection.astro";
+
+const iconBase =
+  "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons";
+
+const technologies = [
+  { name: "Linux", icon: "linux/linux-original.svg" },
+  { name: "Docker", icon: "docker/docker-original.svg" },
+  { name: "Kubernetes", icon: "kubernetes/kubernetes-original.svg" },
+  { name: "GitLab CI", icon: "gitlab/gitlab-original.svg" },
+  { name: "Argo CD", icon: "argocd/argocd-original.svg" },
+  { name: "Terraform", icon: "terraform/terraform-original.svg" },
+  { name: "Ansible", icon: "ansible/ansible-original.svg" },
+  { name: "Python", icon: "python/python-original.svg" },
+];
+
+const projects = [
+  {
+    number: "01",
+    category: "Cloud infrastructure",
+    title: "AWS Infrastructure & Deployment Automation",
+    description:
+      "Provisioning AWS infrastructure with Terraform and configuring an EC2 web server through Ansible and AWS Systems Manager.",
+    tools: ["AWS", "Terraform", "Ansible", "GitHub Actions"],
+  },
+  {
+    number: "02",
+    category: "Continuous integration",
+    title: "Robotics Software Validation",
+    description:
+      "A C++ CI pipeline combining automated builds, unit tests and a functional test bench to check software behavior against numerical quality gates.",
+    tools: ["C++", "CMake", "CTest", "Python"],
+  },
+  {
+    number: "03",
+    category: "Code quality & delivery",
+    title: "PHP Quality & Delivery Pipeline",
+    description:
+      "A hands-on delivery project using a self-hosted GitHub Actions runner, SonarQube analysis and packaged build artifacts.",
+    tools: ["PHP", "GitHub Actions", "SonarQube", "Docker"],
+  },
+];
+
+const experiences = [
+  {
+    company: "Opensee",
+    role: "DevOps Engineer",
+    start: "2025-02",
+    end: "2025-09",
+    startLabel: "Feb 2025",
+    endLabel: "Sep 2025",
+    domain: "Fintech",
+    summary:
+      "Part of the DevOps team, contributing to delivery automation and reproducible deployments.",
+    highlight:
+      "Avoided unnecessary Docker image builds through conditional build rules in the delivery pipelines.",
+    responsibilities: [
+      "Containerized and versioned internal DevOps tools. Built GitLab CI/CD pipelines covering code analysis, linting, security checks, Docker image builds and publication.",
+      "Automated deployments with Ansible and implemented GitOps with ArgoCD for approximately five applications across three Kubernetes clusters.",
+      "Used Prometheus and Grafana for performance monitoring and incident diagnosis, and HashiCorp Vault for centralized secrets management.",
+      "Developed a Python tool to automate backup monitoring across AWS S3 and GCP, with Slack alerts.",
+      "Applied Git and CI practices including atomic commits, dedicated branches and merge requests.",
+      "Wrote technical documentation covering architecture, deployment and operations.",
+    ],
+    tools: [
+      "GitLab CI/CD",
+      "Docker",
+      "Kubernetes",
+      "ArgoCD",
+      "Ansible",
+      "HashiCorp Vault",
+      "Prometheus",
+      "Grafana",
+      "Python",
+      "Terraform",
+      "Debian Linux",
+      "AWS S3",
+      "GCP",
+      "PostgreSQL",
+      "ClickHouse",
+      "NGINX",
+      "HAProxy",
+      "DBeaver",
+      "Postman",
+    ],
+  },
+  {
+    company: "Huawei",
+    role: "Cloud Consultant",
+    start: "2022-02",
+    end: "2024-05",
+    startLabel: "Feb 2022",
+    endLabel: "May 2024",
+    domain: "Telecommunications",
+    summary:
+      "Provided technical consulting and deployed cloud solutions for telecom operators, supporting the design and production rollout of 5G core services.",
+    highlight:
+      "Delivered progressive migration from 1,000 to 10,000 users without service interruption.",
+    responsibilities: [
+      "Deployed and standardized private cloud infrastructure based on OpenStack and Kubernetes to host 5G core services serving more than 10,000 users.",
+      "Managed deployment activities from hardware installation through production integration: design review, software deployment, configuration, network integration and service validation.",
+      "Automated deployment execution, integration and rollback through scripts, supported by connectivity, network integration and functional validation tests.",
+      "Performed phased rollouts and migrations, monitoring metrics during scale-up and supervising services after deployment.",
+      "Coordinated installation, infrastructure, networking, integration and maintenance teams during deployments, migrations and operational handovers.",
+      "Mentored interns on infrastructure and deployment project activities.",
+    ],
+    tools: [
+      "OpenStack",
+      "Kubernetes",
+      "Docker",
+      "Linux",
+      "Ceph",
+      "VXLAN",
+      "VRF",
+      "VLAN",
+      "BGP",
+      "OSPF",
+      "VPN",
+      "TCP/IP",
+      "Python",
+      "Virtualization",
+    ],
+  },
+];
+---
+
+<Layout>
+  <section class="hero container" aria-labelledby="intro-heading">
+    <HeroIntro />
+
+    <InfrastructureStories />
+  </section>
+
+  <section class="technology-section" aria-labelledby="technology-heading">
+    <div class="container">
+      <h2 id="technology-heading" class="technology-heading">
+        Technologies I work with
+      </h2>
+
+      <ul class="technology-list">
+        {
+          technologies.map((technology) => (
+            <li>
+              <img
+                src={`${iconBase}/${technology.icon}`}
+                alt=""
+                aria-hidden="true"
+                width="29"
+                height="29"
+                loading="lazy"
+              />
+              <span>{technology.name}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <AboutStory />
+
+  <DeliveryJourney />
+
+  <section
+    id="projects"
+    class="section section-tinted"
+    aria-labelledby="projects-heading"
+  >
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">SELECTED PROJECTS</p>
+        <h2 id="projects-heading">Projects that show how I work.</h2>
+        <p>
+          Personal projects covering cloud setup, automated delivery
+          and software validation.
+        </p>
+      </div>
+
+      <div class="project-grid">
+        {
+          projects.map((project) => (
+            <article class="project-card">
+              <div class="project-top">
+                <p class="project-category">{project.category}</p>
+                <span class="project-number" aria-hidden="true">
+                  {project.number}
+                </span>
+              </div>
+
+              <h3>{project.title}</h3>
+              <p class="project-description">{project.description}</p>
+
+              <ul class="tag-list" aria-label="Technologies">
+                {project.tools.map((tool) => <li>{tool}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section
+    id="experience"
+    class="section container"
+    aria-labelledby="experience-heading"
+  >
+    <div class="section-heading">
+      <p class="eyebrow">PROFESSIONAL EXPERIENCE</p>
+      <h2 id="experience-heading">Cloud platforms. Production systems.</h2>
+      <p>Experience across fintech and telecommunications.</p>
+    </div>
+
+    <div class="career-list">
+      {
+        experiences.map((experience) => (
+          <article class="career-entry">
+            <div class="career-meta">
+              <p class="career-date">
+                <time datetime={experience.start}>
+                  {experience.startLabel}
+                </time>
+                {" — "}
+                <time datetime={experience.end}>
+                  {experience.endLabel}
+                </time>
+              </p>
+              <p class="career-domain">{experience.domain}</p>
+            </div>
+
+            <div class="career-content">
+              <p class="career-company">{experience.company}</p>
+              <h3>{experience.role}</h3>
+
+              <p class="career-summary">{experience.summary}</p>
+              <p class="career-highlight">{experience.highlight}</p>
+
+              <details class="career-details">
+                <summary>Responsibilities & technical environment</summary>
+
+                <ul class="career-points">
+                  {experience.responsibilities.map((item) => <li>{item}</li>)}
+                </ul>
+
+                <p class="career-stack-label">Technical environment</p>
+
+                <ul class="tag-list" aria-label="Technical environment">
+                  {experience.tools.map((tool) => <li>{tool}</li>)}
+                </ul>
+              </details>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+  <TechnicalSkills />
+
+  <EducationSection />
+  <CertificationsSection />
+
+  <ContactSection />
+</Layout>
